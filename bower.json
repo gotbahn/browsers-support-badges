@@ -1,0 +1,22 @@
+{
+  "name": "browsers-compatibility-badges",
+  "version": "0.0.1",
+  "description": "GitHub browsers compatibility badges generator",
+  "authors": [
+    "Bogdan Plieshka"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/godban/browsers-compatibility-badges",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "react": "~0.13.3",
+    "normalize.css": "~3.0.3",
+    "jquery": "~2.1.4",
+    "flexgrid": "~0.2.0"
+  }
+}

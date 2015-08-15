@@ -1,0 +1,183 @@
+//
+//  Variables
+//  ---------------------------------------------
+
+$color--white: #fff;
+$color--gray-light: #c9c9c9;
+$color--gray-so: #aaa;
+$color--gray: #535353;
+$color--blue: #00aced;
+$color--red: #f33;
+
+$color--disabled: $color--gray-light;
+
+$background-color: $color--white;
+$color: #636363;
+$line-height: 1.5;
+$font-family: 'Open Sans', sans-serif;
+$font-size: 1.4rem;
+$font-weight--light: 300;
+$font-weight--regular: 400;
+$font-weight--semibold: 600;
+
+$indent--xsmall: 1rem;
+$indent--small: 1.5rem;
+$indent: 2rem;
+$indent--large: 2.5rem;
+
+$break--M: 768px;
+$screen--M: $break--M + 1;
+
+//
+//  Extends
+//  ---------------------------------------------
+
+%clearfix {
+    &:after {
+        clear: both;
+        content: '';
+        display: table;
+    }
+}
+
+//
+//  Reset
+//  ---------------------------------------------
+
+//  Change box-sizing model
+
+* {
+    box-sizing: inherit;
+    &:before,
+    &:after {
+        box-sizing: inherit;
+    }
+}
+
+html {
+    box-sizing: border-box;
+}
+
+//
+//  Typography
+//  ---------------------------------------------
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    color: $color;
+    background-color: $background-color;
+    font-size: $font-size;
+    font-family: $font-family;
+    font-weight: $font-weight--regular;
+    line-height: $line-height;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: $font-weight--light;
+}
+
+p {
+    margin: 0 0 $indent;
+}
+
+a {
+    color: $color--blue;
+    &:hover {
+        color: lighten($color--blue, 5%);
+    }
+}
+
+[disabled] {
+    opacity: .5;
+}
+
+//
+//  Content
+//  ---------------------------------------------
+
+.main {
+    background-color: #fff;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.form {
+    &__input {
+        &--text {
+            border: none;
+            text-align: center;
+            width: 2rem;
+        }
+        &--no-spinners {
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+    }
+    &__checkbox {
+        margin-right: .5em;
+    }
+}
+
+.btn {
+    &--text {
+        background-color: transparent;
+        border: none;
+        padding: 0 .5em;
+        &:focus {
+            outline: none;
+        }
+    }
+    &-up {
+        &:active {
+            position: relative;
+            top: -1px;
+        }
+    }
+    &-down {
+        &:active {
+            position: relative;
+            bottom: -1px;
+        }
+    }
+    &[disabled] {
+        color: $color--disabled;
+    }
+}
+
+.table {
+    display: table;
+    margin: 0 auto 2rem;
+    width: 100%;
+    &__row {
+        display: table-row;
+    }
+    &__cell {
+        display: table-cell;
+        padding: .25em 1rem;
+        &--heading {
+            vertical-align: bottom;
+            font-weight: $font-weight--semibold;
+        }
+    }
+}
+
+.browser-version {
+    &__control {
+        font-size: .8em;
+        white-space: nowrap;
+    }
+}
