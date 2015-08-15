@@ -89,8 +89,6 @@ var BrowsersPanel = React.createClass({
             id = target.dataset.index,
             browsers = this.state.browsers;
 
-            console.log(id);
-
         browsers[id].support = !browsers[id].support;
         this.setState({browsers: browsers});
     },
