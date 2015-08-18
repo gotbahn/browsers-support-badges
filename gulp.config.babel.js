@@ -16,7 +16,9 @@ module.exports = () => {
             compiledStyles: temp + 'styles/css/**/*.css',
             compiledScripts: temp + 'scripts/**/*.js',
             html: src + '**/*.html',
-            fonts: src + 'fonts/**/*.*',
+            fonts: [
+                'bower_components/octicons/octicons/octicons.{svg,ttf,eot,woff}'
+            ],
             images: src + 'images/**/*.*',
             scripts: src + '**/*.js',
             jsx: src + '**/*.jsx',

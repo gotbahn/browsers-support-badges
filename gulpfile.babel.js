@@ -29,7 +29,11 @@ gulp.task('clean', (done) => {
 });
 
 gulp.task('clean:fonts', (done) => {
-    clean(config.prod + 'fonts/**/*.*', done);
+    clean([config.temp + 'fonts/**/*.*'], done);
+});
+
+gulp.task('clean:fonts:prod', (done) => {
+    clean([config.prod + 'fonts/**/*.*'], done);
 });
 
 gulp.task('clean:images', (done) => {
@@ -47,6 +51,7 @@ gulp.task('clean:scripts', (done) => {
 gulp.task('clean:code', (done) => {
     const files = [].concat(
         config.temp + '**/*.js',
+        config.prod + 'fonts/**.*',
         config.prod + '**/*.html',
         config.prod + 'scripts/**/*.js'
     );
@@ -58,7 +63,9 @@ gulp.task('styles', gulp.series('clean:styles', () => {
     return gulp
         .src(config.sass)
         .pipe($.plumber())
-        .pipe($.sass())
+        .pipe($.sass({
+            includePaths: [config.bower.directory + '/octicons/octicons']
+        }))
         .pipe($.autoprefixer({
             browsers: [
                 'last 2 version',
@@ -78,10 +85,17 @@ gulp.task('scripts', gulp.series('clean:scripts', () => {
 }));
 
 gulp.task('fonts', gulp.series('clean:fonts', () => {
-    log('Copying fonts from ' + config.fonts);
+    log('Copying fonts from ' + config.fonts + ' to ' + gulp.dest(config.temp + 'fonts'));
     return gulp
         .src(config.fonts)
-        .pipe(gulp.dest(config.prod + 'fonts'));
+        .pipe(gulp.dest(config.temp + 'fonts/octicons'));
+}));
+
+gulp.task('fonts:prod', gulp.series('clean:fonts:prod', () => {
+    log('Copying fonts from ' + config.fonts + ' to ' + gulp.dest(config.prod + 'fonts'));
+    return gulp
+        .src(config.fonts)
+        .pipe(gulp.dest(config.prod + 'fonts/octicons'));
 }));
 
 gulp.task('images', gulp.series('clean:images', () => {
@@ -107,7 +121,7 @@ gulp.task('wiredep', () => {
 });
 
 gulp.task('inject', gulp.series(
-    gulp.parallel('scripts', 'styles', 'wiredep'),
+    gulp.parallel('scripts', 'styles', 'fonts', 'wiredep'),
     () => {
         log('Injecting css & js into html');
         return gulp
@@ -124,30 +138,32 @@ gulp.task('inject', gulp.series(
     })
 );
 
-gulp.task('optimize', gulp.series('inject', () => {
-    let assets = $.useref.assets({
-            searchPath: config.src
-        }),
-        jsFilter = $.filter(['**/*.js'], {restore: true}),
-        cssFilter = $.filter(['**/*.css'], {restore: true});
-    log('Optimizing js, css & html');
-    return gulp
-        .src(config.index)
-        .pipe($.plumber())
-        .pipe(assets)
-        .pipe(cssFilter)
-        .pipe($.csso())
-        .pipe(cssFilter.restore)
-        .pipe(jsFilter)
-        .pipe($.uglify())
-        .pipe(jsFilter.restore)
-        .pipe($.rev())
-        .pipe(assets.restore())
-        .pipe($.useref())
-        .pipe($.revReplace())
-        .pipe(gulp.dest(config.prod))
-        .pipe($.rev.manifest())
-        .pipe(gulp.dest(config.prod));
+gulp.task('optimize', gulp.series(
+    gulp.parallel('inject', 'fonts:prod'),
+    () => {
+        let assets = $.useref.assets({
+                searchPath: config.src
+            }),
+            jsFilter = $.filter(['**/*.js'], {restore: true}),
+            cssFilter = $.filter(['**/*.css'], {restore: true});
+        log('Optimizing js, css & html');
+        return gulp
+            .src(config.index)
+            .pipe($.plumber())
+            .pipe(assets)
+            .pipe(cssFilter)
+            .pipe($.csso())
+            .pipe(cssFilter.restore)
+            .pipe(jsFilter)
+            .pipe($.uglify())
+            .pipe(jsFilter.restore)
+            .pipe($.rev())
+            .pipe(assets.restore())
+            .pipe($.useref())
+            .pipe($.revReplace())
+            .pipe(gulp.dest(config.prod))
+            .pipe($.rev.manifest())
+            .pipe(gulp.dest(config.prod));
 }));
 
 /*

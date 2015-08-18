@@ -1,20 +1,19 @@
 //
-//  Imports
-//  ---------------------------------------------
-
-@import '_gfm.scss';
-
-//
 //  Variables
 //  ---------------------------------------------
 
+$octicons-font-path: "../../fonts/octicons";
+
 $color--white: #fff;
 $color--white-smoke: #f5f5f5;
+$color--gray-d: #ddd;
+$color--gray-d8: #d8d8d8;
 $color--gray-light: #c9c9c9;
 $color--gray-so: #aaa;
 $color--gray: #535353;
+$color--green: #60B13C;
 $color--blue: #00aced;
-$color--red: #f33;
+$color--red: #F0624D;
 
 $color--disabled: $color--gray-light;
 
@@ -22,10 +21,12 @@ $background-color: $color--white;
 $color: #636363;
 $line-height: 1.5;
 $font-family: 'Open Sans', sans-serif;
+$font-family--gfm: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif;
 $font-size: 1.4rem;
 $font-weight--light: 300;
 $font-weight--regular: 400;
 $font-weight--semibold: 600;
+$font-weight--bold: 700;
 
 $indent--xsmall: 1rem;
 $indent--small: 1.5rem;
@@ -34,6 +35,13 @@ $indent--large: 2.5rem;
 
 $break--M: 768px;
 $screen--M: $break--M + 1;
+
+//
+//  Imports
+//  ---------------------------------------------
+
+@import '_gfm.scss';
+@import 'octicons';
 
 //
 //  Extends
@@ -106,6 +114,7 @@ a {
 
 [disabled] {
     opacity: .5;
+    pointer-events: none;
 }
 
 //
@@ -114,9 +123,13 @@ a {
 
 .main {
     background-color: #fff;
-    max-width: 640px;
+    max-width: 790px;
     margin: 0 auto;
     padding: 5rem 2rem;
+    &__title {
+        margin-bottom: 6rem;
+        margin-top: 0;
+    }
 }
 
 .form {
@@ -124,7 +137,7 @@ a {
         &--text {
             border: none;
             text-align: center;
-            width: 2rem;
+            width: 1.5em;
         }
         &--no-spinners {
             &::-webkit-inner-spin-button,
@@ -143,59 +156,181 @@ a {
     &--text {
         background-color: transparent;
         border: none;
-        padding: 0 .5em;
+        padding: 0 .25em;
         &:focus {
             outline: none;
         }
     }
+    &-up,
+    &-down {
+        @extend .octicon;
+        color: lighten($color, 5%);
+        position: relative;
+        top: 1px;
+    }
     &-up {
+        @extend .octicon-chevron-up;
         &:active {
-            position: relative;
-            top: -1px;
+            top: 0px;
         }
     }
     &-down {
+        @extend .octicon-chevron-down;
         &:active {
-            position: relative;
-            bottom: -1px;
+            top: 2px;
         }
+    }
+    &-copy {
+        float: right;
     }
     &[disabled] {
         color: $color--disabled;
     }
 }
 
-.table {
-    display: table;
-    margin: 0 auto 2rem;
-    width: 100%;
-    &__row {
-        display: table-row;
-    }
-    &__cell {
-        display: table-cell;
-        padding: .25em 1rem;
-        &--heading {
-            vertical-align: bottom;
-            font-weight: $font-weight--semibold;
-        }
+.browsers {
+    &__wrap {
+        margin: 0 auto 2rem;
     }
 }
 
-.browser-version {
+.browser {
+    float: left;
+    margin: 0 1rem 3rem;
+    padding: .25em 1em .25em 2rem;
+    &[disabled] {
+        opacity: 1;
+        pointer-events: auto;
+        .browser {
+            &__heading {
+                opacity: .5;
+                transition: opacity .1s linear;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+            &__control {
+                opacity: .5;
+                pointer-events: none;
+            }
+        }
+    }
+    &:first-child,
+    &:nth-child(6) {
+        &:before {
+            position: absolute;
+            border-bottom: 1px solid $color--white-smoke;
+            width: 100%;
+            left: 0;
+            font-size: 1rem;
+            margin-top: -3rem;
+            color: $color--gray-light;
+        }
+    }
+    &:first-child {
+        &:before {
+            content: 'desktop';
+        }
+    }
+    &:nth-child(6) {
+        clear: left;
+        &:before {
+            content: 'mobile';
+        }
+    }
+    &__wrap {
+        @extend %clearfix;
+        user-select: none;
+        position: relative;
+    }
+    &__heading {
+        font-weight: $font-weight--semibold;
+        &:hover {
+            .browser__checkbox {
+                &:checked {
+                    + .browser__title {
+                        &:before {
+                            transform: scale(1.2);
+                        }
+                    }
+                }
+            }
+            .browser__title {
+                &:before {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
     &__control {
         font-size: .8em;
         white-space: nowrap;
     }
+    &__checkbox {
+        position: absolute;
+        clip: rect(0,0,0,0);
+        &:checked {
+            + .browser__title {
+                &:before {
+                    @extend .octicon-check;
+                    color: $color--green;
+                    top: .2rem;
+                }
+            }
+        }
+    }
+    &__title {
+        @extend .octicon-x;
+        cursor: pointer;
+        display: block;
+        position: relative;
+        white-space: nowrap;
+        &:before {
+            @extend .octicon;
+            position: absolute;
+            top: .3rem;
+            right: 100%;
+            margin-right: 1rem;
+            color: $color--red;
+            transition: transform .1s linear;
+        }
+    }
 }
 
 .markdown-body {
+    background-color: $color--white;
+    border: 1px solid $color--gray-d;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     font-size: 1.4rem;
-    margin-bottom: 2rem;
+    font-family: $font-family--gfm;
+    margin-bottom: 3rem;
+    padding: 3rem;
+    word-wrap: break-word;
+    &__title {
+        background-color: $color--white-smoke;
+        margin: 0;
+        border-radius: 3px 3px 0 0;
+        border: 1px solid $color--gray-d8;
+        border-bottom: 0;
+        padding: .9rem 1rem 1rem;
+        font-size: 1em;
+        font-family: $font-family--gfm;
+        font-weight: $font-weight--bold;
+        line-height: 1.2;
+        display: block;
+    }
 }
 
 .markdown-code {
-    background-color: $color--white-smoke;
-    padding: 1em;
+    &__wrap {
+        background-color: $color--white-smoke;
+        padding: 1em;
+    }
+}
+
+.markdown-code {
     white-space: pre;
+    overflow-x: auto;
+    font-size: 1.2rem;
 }

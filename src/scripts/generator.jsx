@@ -26,19 +26,22 @@ var BrowsersPanel = React.createClass({
                     name: 'Opera',
                     version: 2,
                     support: false
+                },
+                {
+                    name: 'iOS Safari',
+                    version: 2,
+                    support: true
+                },
+                {
+                    name: 'Opera Mini',
+                    version: 2,
+                    support: false
+                },
+                {
+                    name: 'Chrome for Android',
+                    version: 2,
+                    support: true
                 }
-                //    {
-                //        name: 'iOS Safari',
-                //        version: ['last two version']
-                //    },
-                //    {
-                //        name: 'Opera Mini',
-                //        version: ['last two version']
-                //    },
-                //    {
-                //        name: 'Chrome for Android',
-                //        version: ['last two version']
-                //    }
             ],
             browsers: {}
         };
@@ -94,57 +97,53 @@ var BrowsersPanel = React.createClass({
     },
     render: function () {
         return (
-            <div>
-                <div className='table'>
-                    <div className='table__row'>
-                        {this.state.browsers.map(function (item, index) {
-                            return (
-                                <div
-                                    className='table__cell table__cell--heading'
-                                    key={item.name}>
+            <div className='browsers__wrap'>
+                <h1 className='main__title'>Browsers support badges for README.md</h1>
+                <div className='browser__wrap'>
+                    {this.state.browsers.map(function (item, index) {
+                        return (
+                            <div
+                                className='browser'
+                                key={item.name}
+                                disabled={!item.support}>
+                                <div className='browser__heading'>
                                     <input
                                         id={'check' + item.name}
-                                        className='form__checkbox'
+                                        className='form__checkbox browser__checkbox'
                                         data-index={index}
                                         defaultChecked={item.support}
                                         onChange={this.handleBrowserSupport}
                                         type='checkbox' />
-                                    <label htmlFor={'check' + item.name}>{item.name}</label>
+                                    <label
+                                        className='browser__title'
+                                        htmlFor={'check' + item.name}>
+                                        <span className='browser__title-text'>{item.name}</span>
+                                    </label>
                                 </div>
-                            );
-                        }, this)}
-                    </div>
-                    <div className='table__row'>
-                        {this.state.browsers.map(function (item, index) {
-                            return (
-                                <div
-                                    className='table__cell browser-version__control'
-                                    key={item.name + 'control'}>
+                                <div className='browser__control'>
                                     last
                                     <input
                                         className='form__input form__input--text form__input--no-spinners'
                                         data-id={index}
                                         onChange={this.handleVersionChange}
                                         value={item.version}
-                                        type='number'/> verions
+                                        type='number' />
                                     <button
                                         className='btn btn--text btn-up'
                                         data-id={index}
                                         ref={'btnUp' + index}
                                         onClick={this.handleVersionVary}
-                                        type='button'>↑
-                                    </button>
+                                        type='button' />
                                     <button
                                         className='btn btn--text btn-down'
                                         data-id={index}
                                         ref={'btnDown' + index}
                                         onClick={this.handleVersionVary}
-                                        type='button'>↓
-                                    </button>
+                                        type='button' />
                                 </div>
-                            );
-                        }, this)}
-                    </div>
+                            </div>
+                        );
+                    }, this)}
                 </div>
                 <BrowsersResult items={this.state.browsers}/>
             </div>
@@ -155,20 +154,26 @@ var BrowsersPanel = React.createClass({
 var BrowsersResult = React.createClass({
     createMDCode: function() {
         var browsers = this.props.items,
-            mdStringHeading = browsers.map(function(item) {
-                return '| ' + item.name + ' ';
-            }),
-            mdStringHeadingLine = browsers.map(function() {
-                return '| --------- ';
-            }),
-            mdStringVersion = browsers.map(function(item) {
-                return '| last ' +  item.version + ' versions';
-            });
-        var mdString = mdStringHeading.join('')
-                       + '|\n'
-                       + mdStringHeadingLine.join('')
-                       + '|\n'
-                       + mdStringVersion.join('');
+            i = 0,
+            mdStringHeadingLine = '',
+            mdString = '';
+
+        for (i; i < browsers.length; i++) {
+            if (browsers[i].support) mdStringHeadingLine += '| --------- ';
+        }
+
+        mdString =  browsers.map(function(item) {
+                        if (item.support) return '| ' + item.name + ' ';
+                    }).join('') +
+                    '|\n' +
+                    mdStringHeadingLine +
+                    '|\n' +
+                    browsers.map(function(item) {
+                        if (item.support) return '| last ' +  item.version + ' versions';
+                    }).join('');
+
+        console.log('firing!');
+
         return mdString;
     },
     createMDPreview: function() {
@@ -179,6 +184,8 @@ var BrowsersResult = React.createClass({
         });
     },
     componentDidMount: function() {
+        var client = new ZeroClipboard(React.findDOMNode(this.refs.mdCopyBtn));
+
         React.findDOMNode(this.refs.mdPreview).innerHTML = this.createMDPreview();
         React.findDOMNode(this.refs.mdCode).textContent = this.createMDCode();
     },
@@ -188,9 +195,25 @@ var BrowsersResult = React.createClass({
     },
     render: function () {
         return (
-            <div className='markdown-wrap'>
-                <div className='markdown-body' ref='mdPreview'></div>
-                <div className='markdown-code' ref='mdCode'></div>
+            <div className='markdown__wrap'>
+                <article className='markdown-body__wrap'>
+                    <h2 className='markdown-body__title'><span className='octicon octicon-book' /> README.md</h2>
+                    <div className='markdown-body'>
+                        <div ref='mdPreview' />
+                        This is how it's gonna looks like in README.md
+                    </div>
+                </article>
+                <div className='markdown-code__wrap'>
+                    <button
+                        className='btn btn-copy btn--text'
+                        ref='mdCopyBtn'
+                        data-clipboard-target='mdCode'
+                        title='Click to copy to clipboard.'>Copy</button>
+                    <div
+                        id='mdCode'
+                        className='markdown-code'
+                        ref='mdCode' />
+                </div>
             </div>
         );
     }
