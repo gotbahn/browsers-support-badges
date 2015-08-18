@@ -68,7 +68,7 @@ var BrowsersPanel = React.createClass({
             if (browsers[id].version < VERSION_MAX) {
                 browsers[id].version++;
             }
-            if(browsers[id].version === VERSION_MAX) {
+            if (browsers[id].version === VERSION_MAX) {
                 target.disabled = true;
             }
         } else {
@@ -78,7 +78,7 @@ var BrowsersPanel = React.createClass({
             if (browsers[id].version > 1) {
                 browsers[id].version--;
             }
-            if(browsers[id].version === 1) {
+            if (browsers[id].version === 1) {
                 target.disabled = true;
             }
         }
@@ -153,31 +153,44 @@ var BrowsersPanel = React.createClass({
 });
 
 var BrowsersResult = React.createClass({
+    createMDCode: function() {
+        var browsers = this.props.items,
+            mdStringHeading = browsers.map(function(item) {
+                return '| ' + item.name + ' ';
+            }),
+            mdStringHeadingLine = browsers.map(function() {
+                return '| --------- ';
+            }),
+            mdStringVersion = browsers.map(function(item) {
+                return '| last ' +  item.version + ' versions';
+            });
+        var mdString = mdStringHeading.join('')
+                       + '|\n'
+                       + mdStringHeadingLine.join('')
+                       + '|\n'
+                       + mdStringVersion.join('');
+        return mdString;
+    },
+    createMDPreview: function() {
+        var mdString = this.createMDCode();
+        return marked(mdString, {
+            gfm: true,
+            tables: true
+        });
+    },
+    componentDidMount: function() {
+        React.findDOMNode(this.refs.mdPreview).innerHTML = this.createMDPreview();
+        React.findDOMNode(this.refs.mdCode).textContent = this.createMDCode();
+    },
+    componentDidUpdate: function() {
+        React.findDOMNode(this.refs.mdPreview).innerHTML = this.createMDPreview();
+        React.findDOMNode(this.refs.mdCode).textContent = this.createMDCode();
+    },
     render: function () {
         return (
-            <div className='table'>
-                <div className='table__row'>
-                    {this.props.items.map(function (item) {
-                        return (
-                            <div
-                                className='table__cell table__cell--heading'
-                                disabled={!item.support}
-                                key={item.name}>{item.name}</div>
-                        );
-                    })}
-                </div>
-                <div className='table__row'>
-                    {this.props.items.map(function (item) {
-                        return (
-                            <div
-                                className='table__cell browser-version__control'
-                                disabled={!item.support}
-                                key={item.name + 'control'}>
-                                last {item.version} version
-                            </div>
-                        );
-                    })}
-                </div>
+            <div className='markdown-wrap'>
+                <div className='markdown-body' ref='mdPreview'></div>
+                <div className='markdown-code' ref='mdCode'></div>
             </div>
         );
     }

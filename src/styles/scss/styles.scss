@@ -1,8 +1,15 @@
 //
+//  Imports
+//  ---------------------------------------------
+
+@import '_gfm.scss';
+
+//
 //  Variables
 //  ---------------------------------------------
 
 $color--white: #fff;
+$color--white-smoke: #f5f5f5;
 $color--gray-light: #c9c9c9;
 $color--gray-so: #aaa;
 $color--gray: #535353;
@@ -180,4 +187,15 @@ a {
         font-size: .8em;
         white-space: nowrap;
     }
+}
+
+.markdown-body {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.markdown-code {
+    background-color: $color--white-smoke;
+    padding: 1em;
+    white-space: pre;
 }
