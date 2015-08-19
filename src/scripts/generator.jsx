@@ -68,11 +68,11 @@ var BrowsersPanel = React.createClass({
     isLastActive: function(arr, id) {
         var supportCounter = 0;
 
-        arr.map(function(item){
-            if(item.support) supportCounter++;
+        arr.map(function(item) {
+            if (item.support) supportCounter++;
         });
 
-        if(supportCounter === 1 && arr[id].support) return true;
+        if (supportCounter === 1 && arr[id].support) return true;
     },
     handleVersionChange: function (event) {
         var target = event.target,
@@ -117,12 +117,12 @@ var BrowsersPanel = React.createClass({
             id = target.dataset.index,
             browsers = this.state.browsers;
 
-        if(this.isLastActive(browsers, id)) return;
+        if (this.isLastActive(browsers, id)) return;
 
         browsers[id].support = !browsers[id].support;
 
         if (browsers[id].name === 'IE / Edge') {
-            for(key in browsers[id].version) {
+            for (key in browsers[id].version) {
                 if (browsers[id].support) {
                     if (key !== 'IE7' && key !== 'IE8') browsers[id].version[key] = true;
                 } else {
@@ -141,11 +141,11 @@ var BrowsersPanel = React.createClass({
 
         browsers[0].version[key] = !browsers[0].version[key];
 
-        for(supportKey in browsers[0].version) {
+        for (supportKey in browsers[0].version) {
             if (browsers[0].version[supportKey]) supportLength++;
         }
 
-        if(supportLength === 0) {
+        if (supportLength === 0) {
             browsers[0].support = false;
         } else {
             browsers[0].support = true;
@@ -156,7 +156,10 @@ var BrowsersPanel = React.createClass({
     render: function () {
         return (
             <div className='browsers__wrap'>
-                <h1 className='main__title'>Browsers support badges for README.md</h1>
+                <h1 className='main__title'>
+                    Browsers support badges for README.md
+                    <span className='main__sub-title'><span className="octicon octicon-mark-github" /> GitHub Flavored Markdown</span>
+                </h1>
                 <div className='browser__wrap'>
                     {this.state.browsers.map(function (item, index) {
                         return (
@@ -225,6 +228,7 @@ var BrowsersPanel = React.createClass({
                             </div>
                         );
                     }, this)}
+                    <span className='pointer'>&#10549;</span>
                 </div>
                 <BrowsersResult items={this.state.browsers}/>
             </div>
@@ -244,7 +248,7 @@ var BrowsersResult = React.createClass({
         }
 
         mdString =  '## Browsers support' +
-                    '\n' +
+                    '\n\n' +
                     browsers.map(function(item) {
                         if (item.support) return (
                             '| ' +
@@ -265,7 +269,11 @@ var BrowsersResult = React.createClass({
                                 }
                                 return '| ' + ieSupportedVersions.join(', ');
                             } else {
-                                return '| last ' +  item.version + ' versions';
+                                if (item.version === 1) {
+                                    return '| last version';
+                                } else {
+                                    return '| last ' +  item.version + ' versions';
+                                }
                             }
                         }
                     }).join('');
@@ -280,7 +288,17 @@ var BrowsersResult = React.createClass({
         });
     },
     componentDidMount: function() {
-        var client = new ZeroClipboard(React.findDOMNode(this.refs.mdCopyBtn));
+        var copy = new ZeroClipboard(React.findDOMNode(this.refs.mdCopyBtn));
+
+        copy.on('aftercopy', function(event) {
+            var target = event.target;
+            target.classList.add('btn-copy--done');
+            target.textContent = 'Copied';
+            setTimeout(function(){
+                target.classList.remove('btn-copy--done');
+                target.textContent = 'Copy';
+            }, 2000);
+        });
 
         React.findDOMNode(this.refs.mdPreview).innerHTML = this.createMDPreview();
         React.findDOMNode(this.refs.mdCode).textContent = this.createMDCode();
@@ -293,12 +311,15 @@ var BrowsersResult = React.createClass({
         return (
             <div className='markdown__wrap'>
                 <article className='markdown-body__wrap'>
-                    <h2 className='markdown-body__title'><span className='octicon octicon-book' /> README.md</h2>
+                    <h2 className='markdown-body__title'>
+                        <span className='octicon octicon-book' /> README.md
+                    </h2>
                     <div className='markdown-body'>
-                        This is how it's gonna looks like in README.md
+                        This is how it's gonna looks like on GitHub:
                         <div ref='mdPreview' />
-                        Just put code below to your project.
+                        Wanna? Just push a button and paste code below into your README.md
                     </div>
+                    <span className='pointer pointer--inverse'>&#10548;</span>
                 </article>
                 <div className='markdown-code__wrap'>
                     <button
@@ -306,7 +327,7 @@ var BrowsersResult = React.createClass({
                         ref='mdCopyBtn'
                         data-clipboard-target='mdCode'
                         title='Click to copy to clipboard.'>Copy</button>
-                    <div
+                    <textarea
                         id='mdCode'
                         className='markdown-code'
                         ref='mdCode' />

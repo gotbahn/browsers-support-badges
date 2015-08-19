@@ -13,6 +13,7 @@ $color--gray-so: #aaa;
 $color--gray: #535353;
 $color--green: #60B13C;
 $color--blue: #00aced;
+$color--deep-blue: #3A87D3;
 $color--red: #F0624D;
 
 $color--disabled: $color--gray-light;
@@ -121,15 +122,51 @@ a {
 //  Content
 //  ---------------------------------------------
 
-.main {
-    background-color: #fff;
+.main,
+.footer {
     max-width: 790px;
     margin: 0 auto;
-    padding: 5rem 2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.main {
+    background-color: #fff;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
     &__title {
         font-size: 3.6rem;
+        line-height: 1.2;
         margin-bottom: 4rem;
         margin-top: 0;
+    }
+    &__sub-title {
+        display: block;
+        text-align: right;
+        font-size: 1.2rem;
+        font-weight: $font-weight--regular;
+        .octicon-mark-github {
+            font-size: 1.4rem;
+        }
+    }
+}
+
+.footer {
+    font-size: 1.1rem;
+    padding-bottom: 2rem;
+    text-align: right;
+    &__link {
+        color: $color;
+        &:hover {
+            color: $color--blue;
+            transition: color .1s linear;
+        }
+    }
+    .octicon-mark-github {
+        font-size: 1.4rem;
+    }
+    .octicon-person {
+        font-size: 1.2rem;
     }
 }
 
@@ -182,7 +219,34 @@ a {
         }
     }
     &-copy {
-        float: right;
+        background-color: $color--deep-blue;
+        border-radius: 3px;
+        color: $color--white;
+        font-size: 1.2rem;
+        margin-left: 1rem;
+        min-width: 7.5rem;
+        padding: .25em .75em;
+        position: absolute;
+        top: 1.4rem;
+        right: 1.4rem;
+        transition: background-color .1s linear;
+        &.btn-copy--done {
+            &:before {
+                @extend .octicon-check;
+            }
+        }
+        &:before {
+            @extend .octicon;
+            @extend .octicon-clippy;
+            margin-right: .4rem;
+            font-size: 1.2em;
+        }
+        &.zeroclipboard-is-hover {
+            background-color: lighten($color--deep-blue, 5%);
+        }
+        &.zeroclipboard-is-active {
+            transform: scale(.9);
+        }
     }
     &[disabled] {
         color: $color--disabled;
@@ -327,6 +391,9 @@ a {
     margin-bottom: 3rem;
     padding: 3rem;
     word-wrap: break-word;
+    &__wrap {
+        position: relative;
+    }
     &__title {
         background-color: $color--white-smoke;
         margin: 0;
@@ -345,12 +412,38 @@ a {
 .markdown-code {
     &__wrap {
         background-color: $color--white-smoke;
+        border: 1px solid $color--gray-d;
+        border-radius: 3px;
         padding: 1em;
+        position: relative;
     }
 }
 
 .markdown-code {
-    white-space: pre;
-    overflow-x: auto;
     font-size: 1.2rem;
+    padding-right: 8rem;
+    background-color: transparent;
+    border: none;
+    min-height: 11rem;
+    width: 100%;
+    &:focus {
+        outline: none;
+    }
+}
+
+.pointer {
+    color: $color--gray-so;
+    font-size: 7rem;
+    user-select: none;
+    cursor: default;
+    position: absolute;
+    bottom: -1.15em;
+    right: 1em;
+    transform: rotate(30deg);
+    z-index: 1;
+    &--inverse {
+        transform: rotate(110deg);
+        right: 1.4em;
+        bottom: -1.1em;
+    }
 }
