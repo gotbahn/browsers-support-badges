@@ -48,9 +48,14 @@ gulp.task('clean:scripts', (done) => {
     clean(config.temp + '**/*.js', done);
 });
 
+gulp.task('clean:swf', (done) => {
+    clean(config.prod + '**/*.swf', done);
+});
+
 gulp.task('clean:code', (done) => {
     const files = [].concat(
         config.temp + '**/*.js',
+        config.prod + 'scripts/**.swf',
         config.prod + 'fonts/**.*',
         config.prod + '**/*.html',
         config.prod + 'scripts/**/*.js'
@@ -82,6 +87,13 @@ gulp.task('scripts', gulp.series('clean:scripts', () => {
         .pipe($.plumber())
         .pipe($.react())
         .pipe(gulp.dest(config.temp));
+}));
+
+gulp.task('swf', gulp.series('clean:swf', () => {
+    return gulp
+        .src(config.swf)
+        .pipe($.plumber())
+        .pipe(gulp.dest(config.prod + 'scripts/'));
 }));
 
 gulp.task('fonts', gulp.series('clean:fonts', () => {
@@ -121,7 +133,7 @@ gulp.task('wiredep', () => {
 });
 
 gulp.task('inject', gulp.series(
-    gulp.parallel('scripts', 'styles', 'fonts', 'wiredep'),
+    gulp.parallel('scripts', 'swf', 'styles', 'fonts', 'wiredep'),
     () => {
         log('Injecting css & js into html');
         return gulp

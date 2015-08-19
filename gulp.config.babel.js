@@ -22,6 +22,7 @@ module.exports = () => {
             images: src + 'images/**/*.*',
             scripts: src + '**/*.js',
             jsx: src + '**/*.jsx',
+            swf: 'bower_components/zeroclipboard/dist/*.swf',
             sass: src + 'styles/scss/**/*.{scss, sass}',
             bower: {
                 json: require('./bower.json'),

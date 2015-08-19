@@ -1,12 +1,12 @@
 {
-  "name": "browsers-compatibility-badges",
+  "name": "browsers-support-badges",
   "version": "0.0.1",
-  "description": "GitHub browsers compatibility badges generator",
+  "description": "GitHub browsers support badges generator",
   "authors": [
     "Bogdan Plieshka"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/godban/browsers-compatibility-badges",
+  "homepage": "https://github.com/godban/browsers-support-badges",
   "ignore": [
     "**/.*",
     "node_modules",

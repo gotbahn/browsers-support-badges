@@ -1,6 +1,6 @@
 var BrowsersPanel = React.createClass({
     getInitialState: function () {
-        var pathToImages = 'https://raw.githubusercontent.com/godban/browsers-compatibility-badges/master/src/images/';
+        var pathToImages = 'https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/';
         return {
             initialBrowsers: [
                 {
