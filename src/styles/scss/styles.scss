@@ -127,7 +127,8 @@ a {
     margin: 0 auto;
     padding: 5rem 2rem;
     &__title {
-        margin-bottom: 6rem;
+        font-size: 3.6rem;
+        margin-bottom: 4rem;
         margin-top: 0;
     }
 }
@@ -196,7 +197,7 @@ a {
 
 .browser {
     float: left;
-    margin: 0 1rem 3rem;
+    margin: 0 2rem 3rem;
     padding: .25em 1em .25em 2rem;
     &[disabled] {
         opacity: 1;
@@ -212,10 +213,21 @@ a {
             &__control {
                 opacity: .5;
                 pointer-events: none;
+                &--ie {
+                    opacity: 1;
+                    pointer-events: auto;
+                    .browser__control-ie-version {
+                        opacity: .5;
+                        transition: opacity .1s linear;
+                        &:hover {
+                            opacity: 1;
+                        }
+                    }
+                }
             }
         }
     }
-    &:first-child,
+ /*   &:first-child,
     &:nth-child(6) {
         &:before {
             position: absolute;
@@ -237,7 +249,7 @@ a {
         &:before {
             content: 'mobile';
         }
-    }
+    } */
     &__wrap {
         @extend %clearfix;
         user-select: none;
@@ -248,14 +260,14 @@ a {
         &:hover {
             .browser__checkbox {
                 &:checked {
-                    + .browser__title {
+                    + .browser__checkbox-label {
                         &:before {
                             transform: scale(1.2);
                         }
                     }
                 }
             }
-            .browser__title {
+            .browser__checkbox-label {
                 &:before {
                     transform: scale(1.1);
                 }
@@ -266,11 +278,14 @@ a {
         font-size: .8em;
         white-space: nowrap;
     }
+    &__control-ie-version {
+        //float: left;
+    }
     &__checkbox {
         position: absolute;
         clip: rect(0,0,0,0);
         &:checked {
-            + .browser__title {
+            + .browser__checkbox-label {
                 &:before {
                     @extend .octicon-check;
                     color: $color--green;
@@ -279,7 +294,7 @@ a {
             }
         }
     }
-    &__title {
+    &__checkbox-label {
         @extend .octicon-x;
         cursor: pointer;
         display: block;
@@ -293,6 +308,11 @@ a {
             margin-right: 1rem;
             color: $color--red;
             transition: transform .1s linear;
+        }
+        &--small {
+            &:before {
+                font-size: 1em;
+            }
         }
     }
 }

@@ -1,46 +1,62 @@
 var BrowsersPanel = React.createClass({
     getInitialState: function () {
+        var pathToImages = 'https://raw.githubusercontent.com/godban/browsers-compatibility-badges/master/src/images/';
         return {
             initialBrowsers: [
                 {
                     name: 'IE / Edge',
-                    version: 2,
+                    version: {
+                        IE7: false,
+                        IE8: false,
+                        IE9: true,
+                        IE10: true,
+                        IE11: true,
+                        Edge: true
+                    },
+                    img: pathToImages + 'edge.png',
                     support: true
                 },
                 {
                     name: 'Firefox',
                     version: 2,
+                    img: pathToImages + 'firefox.png',
                     support: true
                 },
                 {
                     name: 'Chrome',
                     version: 2,
+                    img: pathToImages + 'chrome.png',
                     support: true
                 },
                 {
                     name: 'Safari',
                     version: 2,
+                    img: pathToImages + 'safari.png',
                     support: true
                 },
                 {
                     name: 'Opera',
                     version: 2,
-                    support: false
+                    img: pathToImages + 'opera.png',
+                    support: true
                 },
                 {
                     name: 'iOS Safari',
                     version: 2,
-                    support: true
+                    img: pathToImages + 'safari-ios.png',
+                    support: false
                 },
                 {
                     name: 'Opera Mini',
                     version: 2,
+                    img: pathToImages + 'opera-mini.png',
                     support: false
                 },
                 {
                     name: 'Chrome for Android',
+                    img: pathToImages + 'chrome-android.png',
                     version: 2,
-                    support: true
+                    support: false
                 }
             ],
             browsers: {}
@@ -48,6 +64,15 @@ var BrowsersPanel = React.createClass({
     },
     componentWillMount: function () {
         this.setState({browsers: this.state.initialBrowsers});
+    },
+    isLastActive: function(arr, id) {
+        var supportCounter = 0;
+
+        arr.map(function(item){
+            if(item.support) supportCounter++;
+        });
+
+        if(supportCounter === 1 && arr[id].support) return true;
     },
     handleVersionChange: function (event) {
         var target = event.target,
@@ -92,7 +117,40 @@ var BrowsersPanel = React.createClass({
             id = target.dataset.index,
             browsers = this.state.browsers;
 
+        if(this.isLastActive(browsers, id)) return;
+
         browsers[id].support = !browsers[id].support;
+
+        if (browsers[id].name === 'IE / Edge') {
+            for(key in browsers[id].version) {
+                if (browsers[id].support) {
+                    if (key !== 'IE7' && key !== 'IE8') browsers[id].version[key] = true;
+                } else {
+                    browsers[id].version[key] = false;
+                }
+            }
+        }
+
+        this.setState({browsers: browsers});
+    },
+    handleIEVersionsChange: function(event) {
+        var target = event.target,
+            key = target.dataset.key,
+            browsers = this.state.browsers,
+            supportLength = 0;
+
+        browsers[0].version[key] = !browsers[0].version[key];
+
+        for(supportKey in browsers[0].version) {
+            if (browsers[0].version[supportKey]) supportLength++;
+        }
+
+        if(supportLength === 0) {
+            browsers[0].support = false;
+        } else {
+            browsers[0].support = true;
+        }
+
         this.setState({browsers: browsers});
     },
     render: function () {
@@ -112,14 +170,36 @@ var BrowsersPanel = React.createClass({
                                         className='form__checkbox browser__checkbox'
                                         data-index={index}
                                         defaultChecked={item.support}
+                                        checked={item.support}
                                         onChange={this.handleBrowserSupport}
                                         type='checkbox' />
                                     <label
-                                        className='browser__title'
+                                        className='browser__checkbox-label browser__title'
                                         htmlFor={'check' + item.name}>
                                         <span className='browser__title-text'>{item.name}</span>
                                     </label>
                                 </div>
+                                {(item.name === 'IE / Edge') ?
+                                <div className='browser__control browser__control--ie'>
+                                    {Object.keys(item.version).map(function(key) {
+                                        return (
+                                            <div className='browser__control-ie-version' key={key}>
+                                                <input
+                                                    id={'check' + key}
+                                                    className='form__checkbox browser__checkbox'
+                                                    data-key={key}
+                                                    defaultChecked={item.version[key]}
+                                                    checked={item.version[key]}
+                                                    onChange={this.handleIEVersionsChange}
+                                                    type='checkbox' />
+                                                <label
+                                                    className='browser__checkbox-label browser__checkbox-label--small'
+                                                    htmlFor={'check' + key}>{key}</label>
+                                            </div>
+                                        );
+                                    }, this)}
+                                </div>
+                                :
                                 <div className='browser__control'>
                                     last
                                     <input
@@ -127,6 +207,7 @@ var BrowsersPanel = React.createClass({
                                         data-id={index}
                                         onChange={this.handleVersionChange}
                                         value={item.version}
+                                        max='10'
                                         type='number' />
                                     <button
                                         className='btn btn--text btn-up'
@@ -140,7 +221,7 @@ var BrowsersPanel = React.createClass({
                                         ref={'btnDown' + index}
                                         onClick={this.handleVersionVary}
                                         type='button' />
-                                </div>
+                                </div>}
                             </div>
                         );
                     }, this)}
@@ -162,17 +243,32 @@ var BrowsersResult = React.createClass({
             if (browsers[i].support) mdStringHeadingLine += '| --------- ';
         }
 
-        mdString =  browsers.map(function(item) {
-                        if (item.support) return '| ' + item.name + ' ';
+        mdString =  '## Browsers support' +
+                    '\n' +
+                    browsers.map(function(item) {
+                        if (item.support) return (
+                            '| ' +
+                            '<img src="' + item.img + '" alt="' + item.name + '" width="16px" height="16px" /></br>' +
+                            item.name + ' ');
                     }).join('') +
                     '|\n' +
                     mdStringHeadingLine +
                     '|\n' +
                     browsers.map(function(item) {
-                        if (item.support) return '| last ' +  item.version + ' versions';
+                        if (item.support) {
+                            if (item.name === 'IE / Edge') {
+                                var ieSupportedVersions = [];
+                                for (key in item.version) {
+                                    if (item.version[key]) {
+                                        ieSupportedVersions.push(key);
+                                    }
+                                }
+                                return '| ' + ieSupportedVersions.join(', ');
+                            } else {
+                                return '| last ' +  item.version + ' versions';
+                            }
+                        }
                     }).join('');
-
-        console.log('firing!');
 
         return mdString;
     },
@@ -199,8 +295,9 @@ var BrowsersResult = React.createClass({
                 <article className='markdown-body__wrap'>
                     <h2 className='markdown-body__title'><span className='octicon octicon-book' /> README.md</h2>
                     <div className='markdown-body'>
-                        <div ref='mdPreview' />
                         This is how it's gonna looks like in README.md
+                        <div ref='mdPreview' />
+                        Just put code below to your project.
                     </div>
                 </article>
                 <div className='markdown-code__wrap'>
