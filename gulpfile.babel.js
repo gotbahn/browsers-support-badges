@@ -151,7 +151,7 @@ gulp.task('inject', gulp.series(
 );
 
 gulp.task('optimize', gulp.series(
-    gulp.parallel('inject', 'fonts:prod'),
+    gulp.parallel('inject'),
     () => {
         let assets = $.useref.assets({
                 searchPath: config.src
@@ -208,20 +208,22 @@ gulp.task('bump', () => {
         .pipe(gulp.dest(config.root));
 });
 
-gulp.task('serve', gulp.series('inject', () => {
-    serve();
-}));
-
-gulp.task('serve:prod', gulp.series('optimize', () => {
-    serve('prod');
-}));
-
 gulp.task('build', gulp.series(
-    gulp.parallel('clean', 'optimize'),
+    gulp.parallel('clean', 'optimize', 'fonts:prod', 'images'),
     () => {
         log('Building application...');
     }
 ));
+
+gulp.task('serve', gulp.series('inject', () => {
+    serve();
+}));
+
+gulp.task('serve:prod', gulp.series(
+    gulp.parallel('optimize', 'fonts:prod', 'images'),
+    () => {
+        serve('prod');
+}));
 
 gulp.task('default', gulp.series('serve'));
 
