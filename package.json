@@ -1,6 +1,6 @@
 {
   "name": "browsers-support-badges",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "GitHub browsers support badges generator",
   "authors": [
     "Bogdan Plieshka"
