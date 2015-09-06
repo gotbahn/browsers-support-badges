@@ -145,11 +145,7 @@ var BrowsersPanel = React.createClass({
             if (browsers[0].version[supportKey]) supportLength++;
         }
 
-        if (supportLength === 0) {
-            browsers[0].support = false;
-        } else {
-            browsers[0].support = true;
-        }
+        browsers[0].support = (supportLength !== 0);
 
         this.setState({browsers: browsers});
     },

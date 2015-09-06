@@ -456,5 +456,10 @@ a {
         display: table-cell;
         padding-right: 1rem;
         vertical-align: top;
+        &--gh {
+            iframe {
+                width: 74px;
+            }
+        }
     }
 }
