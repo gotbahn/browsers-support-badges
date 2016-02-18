@@ -243,12 +243,12 @@ var BrowsersResult = React.createClass({
             if (browsers[i].support) mdStringHeadingLine += '| --------- ';
         }
 
-        mdString =  '## Browsers support' +
+        mdString =  '## Browsers support <sub><sup><sub><sub>made by @godban</sub></sub></sup></sub>' +
                     '\n\n' +
                     browsers.map(function(item) {
                         if (item.support) return (
                             '| ' +
-                            '<img src="' + item.img + '" alt="' + item.name + '" width="16px" height="16px" /></br>' +
+                            '[<img src="' + item.img + '" alt="' + item.name + '" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>' +
                             item.name + ' ');
                     }).join('') +
                     '|\n' +
