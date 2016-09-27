@@ -303,7 +303,7 @@ gulp.task('git-tag-bump', done => {
 });
 
 gulp.task('git-push-bump', done => {
-	$.git.push('origin', pkg.config.env, {args: ' --tags'}, err => {
+	$.git.push('origin', '', {args: ' --tags'}, err => {
 		if (err) throw err;
 	});
 	done();
