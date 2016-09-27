@@ -41,6 +41,12 @@ var BrowsersPanel = React.createClass({
                     support: true
                 },
                 {
+                    name: 'Vivaldi',
+                    version: 2,
+                    img: pathToImages + 'vivaldi.png',
+                    support: true
+                },
+                {
                     name: 'iOS Safari',
                     version: 2,
                     img: pathToImages + 'safari-ios.png',
