@@ -1,6 +1,3 @@
 language: node_js
 node_js:
-  - '5.5.0'
-before_script:
-  - npm install gulpjs/gulp-cli#4.0 -g
-script: gulp lint
+  - node
