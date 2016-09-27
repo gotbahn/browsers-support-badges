@@ -1,10 +1,12 @@
-import gulp                from 'gulp';
-import del                 from 'del';
-import browserSync         from 'browser-sync';
+import gulp from 'gulp';
+import del from 'del';
+import browserSync from 'browser-sync';
 import {stream as wiredep} from 'wiredep';
-import {argv as args}      from 'yargs';
-import getConfig           from './gulp.config.babel.js';
-import gulpLoadPlugins     from 'gulp-load-plugins';
+import {argv as args} from 'yargs';
+import getConfig from './gulp.config.babel.js';
+import gulpLoadPlugins from 'gulp-load-plugins';
+import fs from 'fs';
+import semver from 'semver';
 
 const config = getConfig();
 const $ = gulpLoadPlugins({lazy: true});
