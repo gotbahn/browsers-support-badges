@@ -249,7 +249,7 @@ var BrowsersResult = React.createClass({
             if (browsers[i].support) mdStringHeadingLine += '| --------- ';
         }
 
-        mdString =  '## Browsers support <sub><sup><sub><sub>made by @godban</sub></sub></sup></sub>' +
+        mdString =  '## Browsers support <sub><sup><sub><sub>made by <a href="https://godban.github.io">godban</a></sub></sub></sup></sub>' +
                     '\n\n' +
                     browsers.map(function(item) {
                         if (item.support) return (
@@ -317,7 +317,6 @@ var BrowsersResult = React.createClass({
                         <span className='octicon octicon-book' /> README.md
                     </h2>
                     <div className='markdown-body'>
-                        This is how it's gonna looks like on GitHub:
                         <div ref='mdPreview' />
                         Wanna? Just push a button and paste code below into your README.md
                     </div>

@@ -6,8 +6,8 @@ import {argv as args}      from 'yargs';
 import getConfig           from './gulp.config.babel.js';
 import gulpLoadPlugins     from 'gulp-load-plugins';
 
-const config = getConfig(),
-	$ = gulpLoadPlugins({lazy: true});
+const config = getConfig();
+const $ = gulpLoadPlugins({lazy: true});
 
 gulp.task('lint', () => gulp
 	.src(config.allScripts)
@@ -17,37 +17,44 @@ gulp.task('lint', () => gulp
 	.pipe($.eslint.failAfterError())
 );
 
-gulp.task('clean', (done) => {
+gulp.task('clean', function(done) {
 	let delConfig = [].concat(config.prod, config.temp);
 	log('Cleaning ' + $.util.colors.grey(delConfig));
-	del(delConfig, done);
+	del(delConfig);
+	done();
 });
 
-gulp.task('clean:fonts', (done) => {
-	clean([config.temp + 'fonts/**/*.*'], done);
+gulp.task('clean:fonts', function(done) {
+	clean([config.temp + 'fonts/**/*.*']);
+	done();
 });
 
-gulp.task('clean:fonts:prod', (done) => {
-	clean([config.prod + 'fonts/**/*.*'], done);
+gulp.task('clean:fonts:prod', function(done) {
+	clean([config.prod + 'fonts/**/*.*']);
+	done();
 });
 
-gulp.task('clean:images', (done) => {
-	clean(config.prod + 'images/**/*.*', done);
+gulp.task('clean:images', function(done) {
+	clean(config.prod + 'images/**/*.*');
+	done();
 });
 
-gulp.task('clean:styles', (done) => {
-	clean(config.temp + '**/*.css', done);
+gulp.task('clean:styles', function(done) {
+	clean(config.temp + '**/*.css');
+	done();
 });
 
-gulp.task('clean:scripts', (done) => {
-	clean(config.temp + '**/*.js', done);
+gulp.task('clean:scripts', function(done) {
+	clean(config.temp + '**/*.js');
+	done();
 });
 
-gulp.task('clean:swf', (done) => {
-	clean(config.prod + '**/*.swf', done);
+gulp.task('clean:swf', function(done) {
+	clean(config.prod + '**/*.swf');
+	done();
 });
 
-gulp.task('clean:code', (done) => {
+gulp.task('clean:code', function(done) {
 	const files = [].concat(
 		config.temp + '**/*.js',
 		config.prod + 'scripts/**.swf',
@@ -55,12 +62,13 @@ gulp.task('clean:code', (done) => {
 		config.prod + '**/*.html',
 		config.prod + 'scripts/**/*.js'
 	);
-	clean(files, done);
+	clean(files);
+	done();
 });
 
-gulp.task('styles', gulp.series('clean:styles', () => {
+gulp.task('styles', gulp.series('clean:styles', function(done) {
 	log('Compiling Sass ' + config.sass + ' to CSS ' + config.compiledStyles);
-	return gulp
+	gulp
 		.src(config.sass)
 		.pipe($.plumber())
 		.pipe($.sass({
@@ -73,46 +81,51 @@ gulp.task('styles', gulp.series('clean:styles', () => {
 			]
 		}))
 		.pipe(gulp.dest(config.temp + 'styles/css/'));
+	done();
 }));
 
-gulp.task('scripts', gulp.series('clean:scripts', () => {
+gulp.task('scripts', gulp.series('clean:scripts', function(done) {
 	log('Compiling JSX ' + config.jsx + ' to JS ' + config.tempJS);
-	return gulp
+	gulp
 		.src(config.jsx)
 		.pipe($.plumber())
 		.pipe($.react())
 		.pipe(gulp.dest(config.temp));
+	done();
 }));
 
-gulp.task('swf', gulp.series('clean:swf', () => {
-	return gulp
+gulp.task('swf', gulp.series('clean:swf', function(done) {
+	gulp
 		.src(config.swf)
 		.pipe($.plumber())
 		.pipe(gulp.dest(config.prod + 'scripts/'));
+	done();
 }));
 
-gulp.task('fonts', gulp.series('clean:fonts', () => {
+gulp.task('fonts', gulp.series('clean:fonts', function(done) {
 	log('Copying fonts from ' + config.fonts + ' to ' + gulp.dest(config.temp + 'fonts'));
-	return gulp
+	gulp
 		.src(config.fonts)
 		.pipe(gulp.dest(config.temp + 'fonts/octicons'));
+	done();
 }));
 
-gulp.task('fonts:prod', gulp.series('clean:fonts:prod', () => {
+gulp.task('fonts:prod', gulp.series('clean:fonts:prod', function(done) {
 	log('Copying fonts from ' + config.fonts + ' to ' + gulp.dest(config.prod + 'fonts'));
-	return gulp
-		.src(config.fonts)
+	gulp.src(config.fonts)
 		.pipe(gulp.dest(config.prod + 'fonts/octicons'));
+	done();
 }));
 
-gulp.task('images', gulp.series('clean:images', () => {
+gulp.task('images', gulp.series('clean:images', function(done) {
 	log('Copying & compressing images from ' + config.images);
-	return gulp
+	gulp
 		.src(config.images)
 		.pipe($.imagemin({
 			optimizationLevel: 4
 		}))
 		.pipe(gulp.dest(config.prod + 'images'));
+	done();
 }));
 
 gulp.task('wiredep', () => {
@@ -129,9 +142,9 @@ gulp.task('wiredep', () => {
 
 gulp.task('inject', gulp.series(
 	gulp.parallel('scripts', 'swf', 'styles', 'fonts', 'wiredep'),
-	() => {
+	function(done) {
 		log('Injecting css & js into html');
-		return gulp
+		gulp
 			.src(config.index)
 			.pipe($.inject(
 				gulp.src([
@@ -142,22 +155,20 @@ gulp.task('inject', gulp.series(
 				{relative: true}
 			))
 			.pipe(gulp.dest(config.src));
+		done();
 	})
 );
 
 gulp.task('optimize', gulp.series(
 	gulp.parallel('inject'),
-	() => {
-		let assets = $.useref.assets({
-				searchPath: config.src
-			}),
-			jsFilter = $.filter(['**/*.js'], {restore: true}),
-			cssFilter = $.filter(['**/*.css'], {restore: true});
+	function(done) {
+		let	jsFilter = $.filter(['**/*.js'], {restore: true});
+		let	cssFilter = $.filter(['**/*.css'], {restore: true});
 		log('Optimizing js, css & html');
-		return gulp
+		gulp
 			.src(config.index)
 			.pipe($.plumber())
-			.pipe(assets)
+			.pipe($.useref())
 			.pipe(cssFilter)
 			.pipe($.csso())
 			.pipe(cssFilter.restore)
@@ -165,59 +176,28 @@ gulp.task('optimize', gulp.series(
 			.pipe($.uglify())
 			.pipe(jsFilter.restore)
 			.pipe($.rev())
-			.pipe(assets.restore())
 			.pipe($.useref())
 			.pipe($.revReplace())
 			.pipe(gulp.dest(config.prod))
 			.pipe($.rev.manifest())
 			.pipe(gulp.dest(config.prod));
+		done();
 	}));
 
-/*
- * Bump the version
- * --type=pre will bump prerelease version *.*.*-x
- * --type=patch or no flag will bump the patch version *.*.x
- * --type=minor will bump minor version *.x.*
- * --type=major will bump the major version x.*.*
- * --ver=1.2.3 will bump to a specific version and ignore other flags
- */
+gulp.task('build', gulp.series('clean', 'optimize', 'fonts:prod', 'images', function(done) {
+	done();
+}));
 
-gulp.task('bump', () => {
-	let msg = 'Versioning ',
-		type = args.type,
-		version = args.ver,
-		options = {};
-
-	if (version) {
-		options.version = version;
-		msg += 'to ' + version;
-	} else {
-		options.type = type;
-		msg += 'for a ' + type;
-	}
-	log(msg);
-	return gulp
-		.src(config.packages)
-		.pipe($.bump(options))
-		.pipe($.print())
-		.pipe(gulp.dest(config.root));
-});
-
-gulp.task('build', gulp.series(
-	gulp.parallel('clean', 'optimize', 'fonts:prod', 'images'),
-	() => {
-		log('Building application...');
-	}
-));
-
-gulp.task('serve', gulp.series('inject', () => {
+gulp.task('serve', gulp.series('inject', function(done) {
 	serve();
+	done();
 }));
 
 gulp.task('serve:prod', gulp.series(
 	gulp.parallel('optimize', 'fonts:prod', 'images'),
-	() => {
+	function(done) {
 		serve('prod');
+		done();
 	}));
 
 gulp.task('default', gulp.series('serve'));
@@ -262,7 +242,7 @@ function serve(mode) {
 			gulp.series('inject', () => {
 				browserSync.reload();
 			})
-			)
+		)
 			.on('change', (event) => {
 				changeEvent(event);
 			});
@@ -277,12 +257,6 @@ function serve(mode) {
 				'/bower_components': 'bower_components'
 			}
 		},
-		/* ghostMode: {
-		 click: true,
-		 location: false,
-		 forms: true,
-		 scroll: true
-		 }, */
 		notify: false,
 		reloadDelay: config.reloadDelay
 	});

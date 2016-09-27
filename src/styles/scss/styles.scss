@@ -124,7 +124,7 @@ a {
 
 .main,
 .footer {
-    max-width: 790px;
+    max-width: 940px;
     margin: 0 auto;
     padding-right: 2rem;
     padding-left: 2rem;
@@ -132,19 +132,20 @@ a {
 
 .main {
     background-color: #fff;
-    padding-top: 3rem;
+    padding-top: 1rem;
     padding-bottom: 1rem;
     &__title {
         font-size: 3.6rem;
-        line-height: 1.2;
-        margin-bottom: 4rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
         margin-top: 0;
     }
     &__sub-title {
-        display: block;
-        text-align: right;
         font-size: 1.2rem;
         font-weight: $font-weight--regular;
+        margin-left: 1em;
+        vertical-align: text-top;
+        white-space: nowrap;
         .octicon-mark-github {
             font-size: 1.4rem;
         }
@@ -392,7 +393,7 @@ a {
     font-size: 1.4rem;
     font-family: $font-family--gfm;
     margin-bottom: 3rem;
-    padding: 3rem;
+    padding: 4.5rem;
     word-wrap: break-word;
     &__wrap {
         position: relative;
@@ -409,6 +410,10 @@ a {
         font-weight: $font-weight--bold;
         line-height: 1.2;
         display: block;
+    }
+
+    h2 {
+        margin-top: 0;
     }
 }
 

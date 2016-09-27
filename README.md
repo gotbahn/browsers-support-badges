@@ -1,3 +1,6 @@
+[![Travis](https://img.shields.io/travis/godban/browsers-support-badges.svg?maxAge=2592000)](https://github.com/godban/browsers-support-badges)
+[![GitHub release](https://img.shields.io/github/release/godban/browsers-support-badges.svg?maxAge=2592000)](https://github.com/godban/browsers-support-badges)
+
 # Browsers support badges for README.md
 Don't you have a browser support table for your project?
 Try GitHub browsers support badges generator [godban.github.io/browsers-support-badges](http://godban.github.io/browsers-support-badges/)
