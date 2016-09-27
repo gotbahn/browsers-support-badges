@@ -10,6 +10,7 @@ import semver from 'semver';
 
 const config = getConfig();
 const $ = gulpLoadPlugins({lazy: true});
+const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
 gulp.task('lint', () => gulp
 	.src(config.allScripts)
@@ -263,3 +264,57 @@ function serve(mode) {
 		reloadDelay: config.reloadDelay
 	});
 }
+
+/**
+ * Bumping version number and tagging the repository with it.
+ *
+ * --type=pre will bump prerelease version *.*.*-x
+ * --type=patch or no flag will bump the patch version *.*.x
+ * --type=minor will bump minor version *.x.*
+ * --type=major will bump the major version x.*.*
+ */
+const bumpFiles = ['./package.json', './config.js'];
+const newVer = semver.inc(pkg.version, args.type);
+
+gulp.task('bump', () => {
+	log(`Versioning to v${newVer}`);
+
+	return gulp
+		.src(bumpFiles)
+		.pipe($.bump({version: newVer}))
+		.pipe($.print())
+		.pipe(gulp.dest('./'));
+});
+
+gulp.task('git-add-bump', () => {
+	log(`adding ${bumpFiles.join(', ')} to commit`);
+	return gulp.src(bumpFiles).pipe($.git.add());
+});
+
+gulp.task('git-commit-bump', () => {
+	return gulp.src('.').pipe($.git.commit(`publish: v${newVer}`));
+});
+
+gulp.task('git-tag-bump', done => {
+	$.git.tag(`v${newVer}`, '', err => {
+		if (err) throw err;
+	});
+	done();
+});
+
+gulp.task('git-push-bump', done => {
+	$.git.push('origin', pkg.config.env, {args: ' --tags'}, err => {
+		if (err) throw err;
+	});
+	done();
+});
+
+gulp.task('pimp', gulp.series(
+	'bump',
+	'git-add-bump',
+	'git-commit-bump',
+	'git-tag-bump',
+	'git-push-bump'
+), done => {
+	done();
+});
