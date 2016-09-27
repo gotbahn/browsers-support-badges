@@ -273,7 +273,7 @@ function serve(mode) {
  * --type=minor will bump minor version *.x.*
  * --type=major will bump the major version x.*.*
  */
-const bumpFiles = ['./package.json', './config.js'];
+const bumpFiles = ['./package.json'];
 const newVer = semver.inc(pkg.version, args.type);
 
 gulp.task('bump', () => {
