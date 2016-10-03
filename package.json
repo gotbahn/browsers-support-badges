@@ -1,6 +1,6 @@
 {
   "name": "browsers-support-badges",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "GitHub browsers support badges generator",
   "author": "Bogdan Plieshka bogdanplieshka@gmail.com https://godban.github.io",
   "license": "MIT",
