@@ -14,11 +14,11 @@
   ],
   "devDependencies": {},
   "dependencies": {
-    "react": "~0.13.3",
-    "normalize.css": "~3.0.3",
-    "flexgrid": "~0.2.0",
-    "marked": "~0.3.5",
-    "zeroclipboard": "~2.2.0",
-    "octicons": "~3.1.0"
+    "react": "0.13.3",
+    "normalize.css": "3.0.3",
+    "flexgrid": "0.2.0",
+    "marked": "0.3.5",
+    "octicons": "3.1.0",
+    "clipboard": "1.5.12"
   }
 }
