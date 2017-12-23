@@ -39,7 +39,7 @@
     "gulp-bump": "2.4.0",
     "gulp-csso": "2.0.0",
     "gulp-eslint": "3.0.1",
-    "gulp-filter": "4.0.0",
+    "gulp-filter": "5.0.1",
     "gulp-if": "2.0.1",
     "gulp-imagemin": "3.0.3",
     "gulp-inject": "4.1.0",
