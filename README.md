@@ -13,12 +13,4 @@ Try GitHub browsers support badges generator [godban.github.io/browsers-support-
 
 ## Contributing
 
-I'll check out your contribution if you:
-
-* Have a clear and comprehensive description for your changes in pull request.
-
-## License
-
-MIT
-
-
+See [Contributing Chapter](.github/CONTRIBUTING.md)

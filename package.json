@@ -1,61 +1,42 @@
 {
-  "name": "browsers-support-badges",
-  "version": "0.3.1",
-  "description": "GitHub browsers support badges generator",
-  "author": "Bogdan Plieshka bogdanplieshka@gmail.com https://godban.github.io",
-  "license": "MIT",
-  "homepage": "https://github.com/godban/browsers-support-badges",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/godban/browsers-support-badges.git"
-  },
-  "scripts": {
-    "preinstall": "npm i bower && bower install",
-    "start": "gulp serve",
-    "build": "gulp build",
-    "test": "gulp lint"
-  },
-  "dependencies": {
-    "body-parser": "1.8.2",
-    "compression": "1.1.0",
-    "cors": "2.2.0",
-    "express": "4.9.3",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-bump": "2.4.0",
-    "gulp-git": "1.11.3",
-    "morgan": "1.1.1",
-    "serve-favicon": "2.0.1",
-    "yargs": "^5.0.0"
-  },
-  "devDependencies": {
-    "babel-core": "6.14.0",
-    "babel-preset-es2015": "6.14.0",
-    "babel-register": "6.14.0",
-    "browser-sync": "2.16.0",
-    "del": "2.2.2",
-    "esprima": "3.0.0",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-autoprefixer": "3.1.1",
-    "gulp-bump": "2.4.0",
-    "gulp-csso": "2.0.0",
-    "gulp-eslint": "3.0.1",
-    "gulp-filter": "4.0.0",
-    "gulp-if": "2.0.1",
-    "gulp-imagemin": "3.0.3",
-    "gulp-inject": "4.1.0",
-    "gulp-load-plugins": "1.3.0",
-    "gulp-plumber": "1.1.0",
-    "gulp-print": "2.0.1",
-    "gulp-react": "3.0.1",
-    "gulp-rev": "7.1.2",
-    "gulp-rev-replace": "0.4.3",
-    "gulp-sass": "2.3.2",
-    "gulp-task-listing": "1.0.1",
-    "gulp-uglify": "2.0.0",
-    "gulp-useref": "3.1.2",
-    "gulp-util": "3.0.7",
-    "jshint-stylish": "2.2.1",
-    "wiredep": "4.0.0",
-    "yargs": "5.0.0"
-  }
+    "name": "browsers-support-badges",
+    "version": "1.0.0",
+    "description": "GitHub browsers support badges generator",
+    "author": {
+        "name": "Bogdan Plieshka",
+        "homepage": "http://godban.github.io"
+    },
+    "license": "MIT",
+    "homepage": ".",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/godban/browsers-support-badges.git"
+    },
+    "dependencies": {
+        "clipboard": "2.0.0",
+        "marked": "0.3.18",
+        "no-sheet-reset": "2.0.0",
+        "octicons": "7.2.0",
+        "react": "16.2.0",
+        "react-dom": "16.2.0",
+        "react-scripts": "next",
+        "svgr.macro": "1.0.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build"
+    },
+    "browserslist": {
+        "development": [
+            "last 2 chrome versions",
+            "last 2 firefox versions",
+            "last 2 edge versions"
+        ],
+        "production": [
+            ">1%",
+            "last 4 versions",
+            "Firefox ESR",
+            "not ie < 11"
+        ]
+    }
 }

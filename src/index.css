@@ -1,0 +1,396 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  color: #636363;
+  background-color: #fff;
+  font-size: 1.4rem;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 300;
+}
+
+p {
+  margin: 0 0 2rem;
+}
+
+a {
+  color: #00aced;
+}
+
+a:hover {
+  color: #08bbff;
+}
+
+sub,sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline
+}
+
+sup {
+  top: -.5em
+}
+
+sub {
+  bottom: -.25em
+}
+
+[disabled] {
+  opacity: .5;
+  pointer-events: none;
+}
+
+.icon {
+  fill: #636363;
+}
+
+.main,
+.footer {
+  max-width: 940px;
+  margin: 0 auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.main {
+  background-color: #fff;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.main__title {
+  font-size: 3.6rem;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+}
+
+.main__sub-title {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-left: 1em;
+  vertical-align: text-top;
+  white-space: nowrap;
+}
+
+.main__sub-title .icon--markGithub {
+  font-size: 1.4rem;
+}
+
+.footer {
+  font-size: 1.1rem;
+  padding-bottom: 2rem;
+  text-align: right;
+}
+
+.footer__author {
+  padding-top: .3rem;
+}
+
+.footer__link {
+  color: #636363;
+}
+
+.footer__link:hover {
+  color: #00aced;
+  transition: color .1s linear;
+}
+
+.footer .octicon-mark-github {
+  font-size: 1.4rem;
+}
+
+.footer .octicon-person {
+  font-size: 1.2rem;
+}
+
+.form__input--text {
+  border: none;
+  text-align: center;
+  width: 1.5em;
+}
+
+.form__input--no-spinners::-webkit-inner-spin-button, .form__input--no-spinners::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form__checkbox {
+  margin-right: .5em;
+}
+
+.btn--text {
+  background-color: transparent;
+  border: none;
+  padding: 0 .25em;
+}
+
+.btn--text:focus {
+  outline: none;
+}
+
+.btn-up, .btn-down {
+  color: #707070;
+  position: relative;
+  top: 1px;
+}
+
+.btn-up .icon,
+.btn-down .icon {
+  pointer-events: none;
+}
+
+.btn-up:active {
+  top: 0px;
+}
+
+.btn-down:active {
+  top: 2px;
+}
+
+.btn-copy {
+  background-color: #3A87D3;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  min-width: 7.5rem;
+  padding: .25em .75em;
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  transition: background-color .1s linear;
+}
+
+.btn-copy .icon {
+  margin-right: .4rem;
+  font-size: 1.2em;
+  margin-bottom: -0.2em;
+  fill: #fff;
+}
+
+.btn-copy.zeroclipboard-is-hover {
+  background-color: #4f94d8;
+}
+
+.btn-copy.zeroclipboard-is-active {
+  transform: scale(0.9);
+}
+
+.btn[disabled] {
+  color: #c9c9c9;
+}
+
+.browsers__wrap {
+  margin: 0 auto 2rem;
+}
+
+.browser {
+  float: left;
+  margin: 0 2rem 3rem;
+  padding: .25em 1em .25em 2rem;
+}
+
+.browser[disabled] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.browser[disabled] .browser__heading {
+  opacity: .5;
+  transition: opacity .1s linear;
+}
+
+.browser[disabled] .browser__heading:hover {
+  opacity: 1;
+}
+
+.browser[disabled] .browser__control {
+  opacity: .5;
+  pointer-events: none;
+}
+
+.browser[disabled] .browser__control--ie {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.browser[disabled] .browser__control--ie .browser__control-ie-version {
+  opacity: .5;
+  transition: opacity .1s linear;
+}
+
+.browser[disabled] .browser__control--ie .browser__control-ie-version:hover {
+  opacity: 1;
+}
+
+.browser__wrap {
+  user-select: none;
+  position: relative;
+}
+
+.browser__wrap::after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.browser__heading {
+  font-weight: 600;
+}
+
+.browser__heading:hover .browser__checkbox:checked + .browser__checkbox-label .browser__checkbox-icon {
+  transform: scale(1.2);
+}
+
+.browser__heading:hover .browser__checkbox-label .browser__checkbox-icon {
+  transform: scale(1.1);
+}
+
+.browser__control {
+  font-size: .8em;
+  white-space: nowrap;
+}
+
+.browser__checkbox {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+.browser__checkbox:checked + .browser__checkbox-label .icon--check {
+  display: block;
+}
+
+.browser__checkbox:checked + .browser__checkbox-label .icon--cross {
+  display: none;
+}
+
+.browser__checkbox-label {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  white-space: nowrap;
+}
+
+.browser__checkbox-icon {
+  position: absolute;
+  right: 100%;
+  margin-right: 1rem;
+  transition: transform .1s linear;
+}
+
+.icon--check {
+  display: none;
+  fill: #60B13C;
+  top: .2rem;
+}
+
+.icon--cross {
+  display: block;
+  top: .3rem;
+  fill: #F0624D;
+}
+
+.browser__checkbox-label--small .browser__checkbox-icon {
+  font-size: 1em;
+}
+
+.markdown-body {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 1.4rem;
+  font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif;
+  margin-bottom: 3rem;
+  padding: 4.5rem;
+  word-wrap: break-word;
+}
+
+.markdown-body__wrap {
+  position: relative;
+}
+
+.markdown-body__title {
+  background-color: #f5f5f5;
+  margin: 0;
+  border-radius: 3px 3px 0 0;
+  border: 1px solid #d8d8d8;
+  border-bottom: 0;
+  padding: .9rem 1rem 1rem;
+  font-size: 1em;
+  font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  display: block;
+}
+
+.markdown-body h2 {
+  margin-top: 0;
+}
+
+.markdown-code {
+  font-size: 1.2rem;
+  padding-right: 8rem;
+  background-color: transparent;
+  border: none;
+  min-height: 11rem;
+  width: 100%;
+  resize: vertical;
+  max-height: 40rem;
+}
+
+.markdown-code:focus {
+  outline: none;
+}
+
+.markdown-code__wrap {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 1em;
+  position: relative;
+}
+
+.pointer {
+  color: #aaa;
+  font-size: 7rem;
+  user-select: none;
+  cursor: default;
+  position: absolute;
+  bottom: -1.15em;
+  right: 1em;
+  transform: rotate(30deg);
+  z-index: 1;
+}
+
+.pointer--inverse {
+  transform: rotate(110deg);
+  right: 1.4em;
+  bottom: -1.1em;
+}
+
+.social-box {
+  float: left;
+}
+
+.social-box__item {
+  display: table-cell;
+  padding-right: 1rem;
+  vertical-align: top;
+}
+
+.social-box__item--gh iframe {
+  width: 74px;
+}

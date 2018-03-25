@@ -1,3 +1,12 @@
 language: node_js
 node_js:
-  - node
+  node
+before_deploy:
+  npm run build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
