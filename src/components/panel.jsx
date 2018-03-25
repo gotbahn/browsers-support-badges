@@ -4,6 +4,11 @@ import ReactDOM from 'react-dom';
 import Preview from './preview';
 import Icon from './icons';
 
+/**
+ * @todo: replace pathToImages
+ */
+const pathToImages = 'https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/';
+
 class Panel extends React.Component {
     constructor() {
         super();
@@ -20,54 +25,54 @@ class Panel extends React.Component {
                         IE11: true,
                         Edge: true
                     },
-                    img: require('../assets/images/edge.png'),
+                    img: pathToImages + 'edge.png',
                     support: true
                 },
                 {
                     name: 'Firefox',
                     version: 2,
-                    img: require('../assets/images/firefox.png'),
+                    img: pathToImages + 'firefox.png',
                     support: true
                 },
                 {
                     name: 'Chrome',
                     version: 2,
-                    img: require('../assets/images/chrome.png'),
+                    img: pathToImages + 'chrome.png',
                     support: true
                 },
                 {
                     name: 'Safari',
                     version: 2,
-                    img: require('../assets/images/safari.png'),
+                    img: pathToImages + 'safari.png',
                     support: true
                 },
                 {
                     name: 'Opera',
                     version: 2,
-                    img: require('../assets/images/opera.png'),
+                    img: pathToImages + 'opera.png',
                     support: true
                 },
                 {
                     name: 'Vivaldi',
                     version: 2,
-                    img: require('../assets/images/vivaldi.png'),
+                    img: pathToImages + 'vivaldi.png',
                     support: true
                 },
                 {
                     name: 'iOS Safari',
                     version: 2,
-                    img: require('../assets/images/safari-ios.png'),
+                    img: pathToImages + 'safari-ios.png',
                     support: false
                 },
                 {
                     name: 'Opera Mini',
                     version: 2,
-                    img: require('../assets/images/opera-mini.png'),
+                    img: pathToImages + 'opera-mini.png',
                     support: false
                 },
                 {
                     name: 'Chrome for Android',
-                    img: require('../assets/images/chrome-android.png'),
+                    img: pathToImages + 'chrome-android.png',
                     version: 2,
                     support: false
                 }
@@ -240,7 +245,9 @@ class Panel extends React.Component {
                                                         className='browser__checkbox-label browser__checkbox-label--small'
                                                         htmlFor={'check' + key}
                                                     >
-                                                        <Icon.Check className="icon icon--check browser__checkbox-icon" />
+                                                        <Icon.Check
+                                                            className="icon icon--check browser__checkbox-icon"
+                                                        />
                                                         <Icon.X className="icon icon--cross browser__checkbox-icon" />
                                                         {key}
                                                     </label>
