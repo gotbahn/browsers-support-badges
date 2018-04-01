@@ -17,7 +17,7 @@
         "marked": "0.3.18",
         "no-sheet-reset": "2.0.0",
         "octicons": "7.2.0",
-        "react": "16.2.0",
+        "react": "16.3.0",
         "react-dom": "16.3.0",
         "react-scripts": "next",
         "svgr.macro": "1.0.4"
