@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 
 import marked from 'marked';
 import Clipboard from 'clipboard';
 
+import Icon from './icons';
+
 class Preview extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            isCopied: null,
+        };
+    }
+
     createMDCode() {
         const {browsers} = this.props;
 
@@ -18,13 +28,13 @@ class Preview extends React.Component {
         }
 
         return (
-            '## Browsers support <sub><sup><sub><sub>made by <a href="https://godban.github.io">godban</a></sub></sub></sup></sub>' +
+            '## Browsers support' +
             '\n\n' +
             browsers.map((item) => {
                 if (item.support) {
                     return (
                         '| ' +
-                        '[<img src="' + item.img + '" alt="' + item.name + '" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>' +
+                        '[<img src="' + item.img + '" alt="' + item.name + '" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>' +
                         item.name + ' ');
                 }
 
@@ -74,16 +84,14 @@ class Preview extends React.Component {
 
         new Clipboard(copyAction, {
             target: () => {
-                copyAction.classList.add('btn-copy--done');
-                copyAction.textContent = 'Copied';
+                this.setState({isCopied: true});
 
-                setTimeout(function () {
+                setTimeout(() => {
                     copyCode.blur();
                 }, 0);
 
-                setTimeout(function () {
-                    copyAction.classList.remove('btn-copy--done');
-                    copyAction.textContent = 'Copy';
+                setTimeout(() => {
+                    this.setState({isCopied: false});
                 }, 2000);
 
                 return copyCode;
@@ -101,24 +109,35 @@ class Preview extends React.Component {
 
     render() {
         return (
-            <div className='markdown__wrap'>
-                <article className='markdown-body__wrap'>
-                    <h2 className='markdown-body__title'>
-                        <span className='octicon octicon-book' /> README.md
-                    </h2>
+            <div className='markdown'>
+                <div className='markdown-body__wrap'>
+                    <h3 className='markdown-body__title'>
+                        <Icon.Book className="icon icon--book" /> README.md
+                    </h3>
                     <div className='markdown-body'>
                         <div ref='mdPreview' />
-                        Wanna? Just push a button and paste code below into your README.md
+                        <div className="tip">Click to collect code and paste it into yours README.md</div>
                     </div>
                     <span className='pointer pointer--inverse'>&#10548;</span>
-                </article>
+                </div>
                 <div className='markdown-code__wrap'>
                     <button
                         className='btn btn-copy btn--text'
                         ref='mdCopyBtn'
                         title='Click to copy to clipboard.'
                     >
-                        Copy
+                        {
+                            this.state.isCopied ?
+                                <Fragment>
+                                    <Icon.Check className="icon--copy" />
+                                    Copied
+                                </Fragment>
+                                :
+                                <Fragment>
+                                    <Icon.Clippy className="icon--copy" />
+                                    Copy
+                                </Fragment>
+                        }
                     </button>
                     <textarea
                         id='mdCode'

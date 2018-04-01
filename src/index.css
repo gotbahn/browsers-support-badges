@@ -1,20 +1,21 @@
+:root {
+  --max-width: 980px;
+}
+
 html {
   font-size: 62.5%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  color: #636363;
+  color: #24292e;
   background-color: #fff;
   font-size: 1.4rem;
-  font-family: "Open Sans", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-weight: 400;
   line-height: 1.5;
-}
-
-h1,
-h2,
-h3 {
-  font-weight: 300;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 p {
@@ -29,7 +30,7 @@ a:hover {
   color: #08bbff;
 }
 
-sub,sup {
+sub, sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -49,31 +50,28 @@ sub {
   pointer-events: none;
 }
 
-.icon {
-  fill: #636363;
+.icon--book {
+  font-size: 1.6rem;
+  vertical-align: text-bottom;
+  fill: currentColor;
 }
 
 .main,
 .footer {
-  max-width: 940px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding-right: 2rem;
-  padding-left: 2rem;
 }
 
 .main {
   background-color: #fff;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .main__title {
   font-size: 3.6rem;
   line-height: 1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 4.5rem;
   margin-top: 0;
-  padding-top: 1em;
-  padding-bottom: 0.5em;
+  padding-top: 3rem;
 }
 
 .main__sub-title {
@@ -88,22 +86,35 @@ sub {
   font-size: 1.4rem;
 }
 
+.icon--markGithub {
+  margin-bottom: -.1em;
+}
+
 .footer {
+  display: flex;
+  justify-content: center;
   font-size: 1.1rem;
-  padding-bottom: 2rem;
-  text-align: right;
+  margin-bottom: 3rem;
 }
 
-.footer__author {
-  padding-top: .3rem;
+.author {
+  margin-left: 1em;
+  flex-grow: 1;
+  color: #24292e;
 }
 
-.footer__link {
-  color: #636363;
+.authorLink {
+  color: #24292e;
+  text-decoration: underline;
 }
 
-.footer__link:hover {
-  color: #00aced;
+.authorIcon {
+  margin-bottom: -.1em;
+  margin-right: .3em;
+  margin-left: .3em;
+}
+
+.authorLink:hover {
   transition: color .1s linear;
 }
 
@@ -128,6 +139,10 @@ sub {
 
 .form__checkbox {
   margin-right: .5em;
+}
+
+.btn {
+  cursor: pointer;
 }
 
 .btn--text {
@@ -192,8 +207,14 @@ sub {
   color: #c9c9c9;
 }
 
+.icon--copy {
+  fill: #fff;
+  margin-right: .3em;
+  margin-bottom: -.1em;
+}
+
 .browsers__wrap {
-  margin: 0 auto 2rem;
+  margin: 0 auto 3rem;
 }
 
 .browser {
@@ -306,34 +327,35 @@ sub {
   font-size: 1em;
 }
 
-.markdown-body {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  font-size: 1.4rem;
-  font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif;
-  margin-bottom: 3rem;
-  padding: 4.5rem;
-  word-wrap: break-word;
+.markdown {
+  font-weight: 400;
 }
 
 .markdown-body__wrap {
   position: relative;
 }
 
+.markdown-body {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 1.6rem;
+  margin-bottom: 4.5rem;
+  padding: 4.5rem 4.5rem 3rem;
+}
+
 .markdown-body__title {
-  background-color: #f5f5f5;
-  margin: 0;
-  border-radius: 3px 3px 0 0;
-  border: 1px solid #d8d8d8;
-  border-bottom: 0;
-  padding: .9rem 1rem 1rem;
-  font-size: 1em;
-  font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
   display: block;
+  padding: 0.9rem 1rem 1rem;
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+  background-color: #f6f8fa;
+  border: 1px solid rgba(27,31,35,0.15);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  font-weight: 600;
 }
 
 .markdown-body h2 {
@@ -349,6 +371,7 @@ sub {
   width: 100%;
   resize: vertical;
   max-height: 40rem;
+  color: #636363;
 }
 
 .markdown-code:focus {
@@ -356,11 +379,18 @@ sub {
 }
 
 .markdown-code__wrap {
-  background-color: #f5f5f5;
+  background-color: #f6f8fa;
   border: 1px solid #ddd;
   border-radius: 3px;
   padding: 1em;
   position: relative;
+}
+
+.tip {
+  text-align: right;
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  color: #6a6a6a;
 }
 
 .pointer {
@@ -373,6 +403,7 @@ sub {
   right: 1em;
   transform: rotate(30deg);
   z-index: 1;
+  font-family: Arial, sans-serif;
 }
 
 .pointer--inverse {
@@ -381,9 +412,7 @@ sub {
   bottom: -1.1em;
 }
 
-.social-box {
-  float: left;
-}
+.social-box {}
 
 .social-box__item {
   display: table-cell;

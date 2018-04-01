@@ -4,10 +4,7 @@ import ReactDOM from 'react-dom';
 import Preview from './preview';
 import Icon from './icons';
 
-/**
- * @todo: replace pathToImages
- */
-const pathToImages = 'https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/';
+const buildLogoSrc = (name, size = '48x48') => `https://raw.githubusercontent.com/alrra/browser-logos/master/src/${name}/${name}_${size}.png`;
 
 class Panel extends React.Component {
     constructor() {
@@ -25,55 +22,67 @@ class Panel extends React.Component {
                         IE11: true,
                         Edge: true
                     },
-                    img: pathToImages + 'edge.png',
+                    img: buildLogoSrc('edge'),
                     support: true
                 },
                 {
                     name: 'Firefox',
                     version: 2,
-                    img: pathToImages + 'firefox.png',
+                    img: buildLogoSrc('firefox'),
                     support: true
                 },
                 {
                     name: 'Chrome',
                     version: 2,
-                    img: pathToImages + 'chrome.png',
+                    img: buildLogoSrc('chrome'),
                     support: true
                 },
                 {
                     name: 'Safari',
                     version: 2,
-                    img: pathToImages + 'safari.png',
-                    support: true
-                },
-                {
-                    name: 'Opera',
-                    version: 2,
-                    img: pathToImages + 'opera.png',
-                    support: true
-                },
-                {
-                    name: 'Vivaldi',
-                    version: 2,
-                    img: pathToImages + 'vivaldi.png',
+                    img: buildLogoSrc('safari'),
                     support: true
                 },
                 {
                     name: 'iOS Safari',
                     version: 2,
-                    img: pathToImages + 'safari-ios.png',
-                    support: false
+                    img: buildLogoSrc('safari-ios'),
+                    support: true
+                },
+                {
+                    name: 'Samsung',
+                    version: 2,
+                    img: buildLogoSrc('samsung-internet'),
+                    support: true
+                },
+                {
+                    name: 'Opera',
+                    version: 2,
+                    img: buildLogoSrc('opera'),
+                    support: true
                 },
                 {
                     name: 'Opera Mini',
                     version: 2,
-                    img: pathToImages + 'opera-mini.png',
+                    img: buildLogoSrc('opera-mini'),
                     support: false
                 },
                 {
-                    name: 'Chrome for Android',
-                    img: pathToImages + 'chrome-android.png',
+                    name: 'Vivaldi',
                     version: 2,
+                    img: buildLogoSrc('vivaldi'),
+                    support: false
+                },
+                {
+                    name: 'Yandex',
+                    version: 2,
+                    img: buildLogoSrc('yandex'),
+                    support: false
+                },
+                {
+                    name: 'Electron',
+                    version: 2,
+                    img: buildLogoSrc('electron'),
                     support: false
                 }
             ],
@@ -196,7 +205,7 @@ class Panel extends React.Component {
         return (
             <div className='browsers__wrap'>
                 <h1 className='main__title'>
-                    Browsers support badges for README.md
+                    Browsers support for README.md
                     <span className='main__sub-title'>
                         <Icon.MarkGithub className="icon icon--markGithub" />
                         <span className="octicon octicon-mark-github" /> GitHub Flavored Markdown

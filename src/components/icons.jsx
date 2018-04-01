@@ -1,6 +1,7 @@
 import toReactComponent from 'svgr.macro';
 
 const {
+    Book,
     Check,
     ChevronUp,
     ChevronDown,
@@ -13,6 +14,7 @@ const {
 );
 
 export default {
+    Book,
     Check,
     ChevronUp,
     ChevronDown,
