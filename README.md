@@ -1,9 +1,11 @@
-[![GitHub tag](https://img.shields.io/github/tag/godban/browsers-support-badges.svg?maxAge=2592000)](https://github.com/godban/browsers-support-badges)
-[![Travis](https://img.shields.io/travis/godban/browsers-support-badges.svg?maxAge=2592000)](https://github.com/godban/browsers-support-badges)
+# Browsers support for README.md
+Do you want to introduce browsers support for your project?
+Try [Browsers Support Generator](http://godban.github.io/browsers-support-badges/)
 
-# Browsers support badges for README.md
-Don't you have a browser support table for your project?
-Try GitHub browsers support badges generator [godban.github.io/browsers-support-badges](http://godban.github.io/browsers-support-badges/)
+[![GitHub tag](https://img.shields.io/github/tag/godban/browsers-support-badges.svg)](https://github.com/godban/browsers-support-badges)
+[![Travis](https://img.shields.io/travis/godban/browsers-support-badges.svg)](https://github.com/godban/browsers-support-badges)
+[![David](https://img.shields.io/david/godban/browsers-support-badges.svg)](https://github.com/godban/browsers-support-badges)
+[![David](https://img.shields.io/david/dev/godban/browsers-support-badges.svg)](https://github.com/godban/browsers-support-badges)
 
 ## Example
 
