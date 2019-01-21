@@ -34,7 +34,7 @@ class Preview extends React.Component {
                 if (item.support) {
                     return (
                         '| ' +
-                        '[<img src="' + item.img + '" alt="' + item.name + '" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>' +
+                        '[<img src="' + item.img + '" alt="' + item.name + '" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>' +
                         item.name + ' ');
                 }
 
