@@ -2,4 +2,4 @@
 # and automatically requests reviews from them when a pull request changes any owned files
 # For more details see https://github.com/blog/2392-introducing-code-owners
 
-* @godban
+* @godban @zuni4ka
