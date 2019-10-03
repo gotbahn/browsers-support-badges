@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import Icon from './icons';
+import {ReactComponent as IconMarkGithub} from '@primer/octicons/build/svg/mark-github.svg';
 
 (function(d,s,id){let js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1547693265447721&autoLogAppEvents=1';fjs.parentNode.insertBefore(js,fjs);}(document,'script','facebook-jssdk'));
 
@@ -17,7 +17,7 @@ const Footer = () => {
                     target="_blank"
                     rel="author"
                 >
-                    <Icon.MarkGithub className="authorIcon" />
+                    <IconMarkGithub className="authorIcon" />
                     {'godban'}
                 </a>
             </div>

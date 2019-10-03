@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 import marked from 'marked';
 import Clipboard from 'clipboard';
 
-import Icon from './icons';
+import {ReactComponent as IconBook} from '@primer/octicons/build/svg/book.svg';
+import {ReactComponent as IconCheck} from '@primer/octicons/build/svg/check.svg';
+import {ReactComponent as IconClippy} from '@primer/octicons/build/svg/clippy.svg';
 
 class Preview extends React.Component {
     constructor() {
@@ -112,7 +114,7 @@ class Preview extends React.Component {
             <div className='markdown'>
                 <div className='markdown-body__wrap'>
                     <h3 className='markdown-body__title'>
-                        <Icon.Book className="icon icon--book" /> README.md
+                        <IconBook className="icon icon--book" /> README.md
                     </h3>
                     <div className='markdown-body'>
                         <div ref='mdPreview' />
@@ -129,12 +131,12 @@ class Preview extends React.Component {
                         {
                             this.state.isCopied ?
                                 <Fragment>
-                                    <Icon.Check className="icon--copy" />
+                                    <IconCheck className="icon--copy" />
                                     Copied
                                 </Fragment>
                                 :
                                 <Fragment>
-                                    <Icon.Clippy className="icon--copy" />
+                                    <IconClippy className="icon--copy" />
                                     Copy
                                 </Fragment>
                         }
