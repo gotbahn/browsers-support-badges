@@ -2,7 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Preview from './preview';
-import Icon from './icons';
+
+import {ReactComponent as IconMarkGithub} from '@primer/octicons/build/svg/mark-github.svg';
+import {ReactComponent as IconCheck} from '@primer/octicons/build/svg/check.svg';
+import {ReactComponent as IconX} from '@primer/octicons/build/svg/x.svg';
+import {ReactComponent as IconChevronUp} from '@primer/octicons/build/svg/chevron-up.svg';
+import {ReactComponent as IconChevronDown} from '@primer/octicons/build/svg/chevron-down.svg';
 
 const buildLogoSrc = (name, size = '48x48') => `https://raw.githubusercontent.com/alrra/browser-logos/master/src/${name}/${name}_${size}.png`;
 
@@ -207,7 +212,7 @@ class Panel extends React.Component {
                 <h1 className='main__title'>
                     Browsers support for README.md
                     <span className='main__sub-title'>
-                        <Icon.MarkGithub className="icon icon--markGithub" />
+                        <IconMarkGithub className="icon icon--markGithub" />
                         <span className="octicon octicon-mark-github" /> GitHub Flavored Markdown
                     </span>
                 </h1>
@@ -232,8 +237,8 @@ class Panel extends React.Component {
                                         className='browser__checkbox-label browser__title'
                                         htmlFor={'check' + item.name}
                                     >
-                                        <Icon.Check className="icon icon--check browser__checkbox-icon" />
-                                        <Icon.X className="icon icon--cross browser__checkbox-icon" />
+                                        <IconCheck className="icon icon--check browser__checkbox-icon" />
+                                        <IconX className="icon icon--cross browser__checkbox-icon" />
                                         <span className='browser__title-text'>{item.name}</span>
                                     </label>
                                 </div>
@@ -254,10 +259,10 @@ class Panel extends React.Component {
                                                         className='browser__checkbox-label browser__checkbox-label--small'
                                                         htmlFor={'check' + key}
                                                     >
-                                                        <Icon.Check
+                                                        <IconCheck
                                                             className="icon icon--check browser__checkbox-icon"
                                                         />
-                                                        <Icon.X className="icon icon--cross browser__checkbox-icon" />
+                                                        <IconX className="icon icon--cross browser__checkbox-icon" />
                                                         {key}
                                                     </label>
                                                 </div>
@@ -282,7 +287,7 @@ class Panel extends React.Component {
                                             onClick={this.handleVersionVaryBound}
                                             type='button'
                                         >
-                                            <Icon.ChevronUp className="icon" />
+                                            <IconChevronUp className="icon" />
                                         </button>
                                         <button
                                             className='btn btn--text btn-down'
@@ -291,7 +296,7 @@ class Panel extends React.Component {
                                             onClick={this.handleVersionVaryBound}
                                             type='button'
                                         >
-                                            <Icon.ChevronDown className="icon" />
+                                            <IconChevronDown className="icon" />
                                         </button>
                                     </div>}
                             </div>
