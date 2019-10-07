@@ -21,7 +21,7 @@
         "marked": "0.7.0",
         "no-sheet-reset": "2.0.0",
         "@primer/octicons": "9.1.1",
-        "react": "16.10.1",
+        "react": "16.10.2",
         "react-dom": "16.10.1",
         "react-scripts": "3.2.0"
     },
