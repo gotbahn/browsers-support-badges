@@ -22,7 +22,7 @@
         "no-sheet-reset": "2.0.0",
         "@primer/octicons": "9.2.0",
         "react": "16.10.1",
-        "react-dom": "16.10.1",
+        "react-dom": "16.11.0",
         "react-scripts": "3.2.0"
     },
     "browserslist": {
