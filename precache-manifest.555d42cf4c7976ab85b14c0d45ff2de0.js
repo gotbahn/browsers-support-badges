@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dcb01363fcb4a3fc8779560731445b2a",
+    "revision": "349581973de06aa3cf134d8da8dc0583",
     "url": "/browsers-support-badges/index.html"
   },
   {
-    "revision": "f4fdf545289bf2dfff14",
+    "revision": "13a60e3d6bfae8eb9b21",
     "url": "/browsers-support-badges/static/css/2.02d6bbd9.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browsers-support-badges/static/css/main.76fe0199.chunk.css"
   },
   {
-    "revision": "f4fdf545289bf2dfff14",
-    "url": "/browsers-support-badges/static/js/2.342227ee.chunk.js"
+    "revision": "13a60e3d6bfae8eb9b21",
+    "url": "/browsers-support-badges/static/js/2.959b731f.chunk.js"
   },
   {
     "revision": "f672ce4934cf79b22633",
@@ -44,8 +44,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browsers-support-badges/static/media/clippy.60cabd4b.svg"
   },
   {
-    "revision": "207687a1a5ee00eb276adf2eebf83d5e",
-    "url": "/browsers-support-badges/static/media/mark-github.207687a1.svg"
+    "revision": "c66e419564e8ae3db63950a574ba6a4f",
+    "url": "/browsers-support-badges/static/media/mark-github.c66e4195.svg"
   },
   {
     "revision": "a0f8f5984e19d467ac8207a1e9fa26fb",
