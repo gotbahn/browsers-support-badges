@@ -20,7 +20,7 @@
         "clipboard": "2.0.4",
         "marked": "0.7.0",
         "no-sheet-reset": "2.0.0",
-        "@primer/octicons": "9.3.0",
+        "@primer/octicons": "9.3.1",
         "react": "16.10.1",
         "react-dom": "16.11.0",
         "react-scripts": "3.2.0"
