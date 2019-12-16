@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4e0b950a67c11ff079cb3bc8d78c039b",
+    "revision": "77059606cc589206e444228ce8509a50",
     "url": "/browsers-support-badges/index.html"
   },
   {
-    "revision": "ce524a180d58c30e0c41",
+    "revision": "76ed67ee54af5ae54f5d",
     "url": "/browsers-support-badges/static/css/2.02d6bbd9.chunk.css"
   },
   {
-    "revision": "498af3568a68e846efc2",
+    "revision": "c68f8f08f3c73fece43c",
     "url": "/browsers-support-badges/static/css/main.76fe0199.chunk.css"
   },
   {
-    "revision": "ce524a180d58c30e0c41",
-    "url": "/browsers-support-badges/static/js/2.9e8b79ba.chunk.js"
+    "revision": "76ed67ee54af5ae54f5d",
+    "url": "/browsers-support-badges/static/js/2.9093dc94.chunk.js"
   },
   {
     "revision": "449cb7cb731d8242a9c1da9f7ba27a71",
-    "url": "/browsers-support-badges/static/js/2.9e8b79ba.chunk.js.LICENSE"
+    "url": "/browsers-support-badges/static/js/2.9093dc94.chunk.js.LICENSE"
   },
   {
-    "revision": "498af3568a68e846efc2",
-    "url": "/browsers-support-badges/static/js/main.476984f0.chunk.js"
+    "revision": "c68f8f08f3c73fece43c",
+    "url": "/browsers-support-badges/static/js/main.eaa6945f.chunk.js"
   },
   {
     "revision": "7c33403393e48c06e18c",
