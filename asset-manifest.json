@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/browsers-support-badges/static/css/main.76fe0199.chunk.css",
-    "main.js": "/browsers-support-badges/static/js/main.eaa6945f.chunk.js",
-    "main.js.map": "/browsers-support-badges/static/js/main.eaa6945f.chunk.js.map",
-    "runtime-main.js": "/browsers-support-badges/static/js/runtime-main.e5e4774d.js",
-    "runtime-main.js.map": "/browsers-support-badges/static/js/runtime-main.e5e4774d.js.map",
+    "main.js": "/browsers-support-badges/static/js/main.4eb20cee.chunk.js",
+    "main.js.map": "/browsers-support-badges/static/js/main.4eb20cee.chunk.js.map",
+    "runtime-main.js": "/browsers-support-badges/static/js/runtime-main.1a9ef2cd.js",
+    "runtime-main.js.map": "/browsers-support-badges/static/js/runtime-main.1a9ef2cd.js.map",
     "static/css/2.02d6bbd9.chunk.css": "/browsers-support-badges/static/css/2.02d6bbd9.chunk.css",
-    "static/js/2.9093dc94.chunk.js": "/browsers-support-badges/static/js/2.9093dc94.chunk.js",
-    "static/js/2.9093dc94.chunk.js.map": "/browsers-support-badges/static/js/2.9093dc94.chunk.js.map",
+    "static/js/2.d275db3c.chunk.js": "/browsers-support-badges/static/js/2.d275db3c.chunk.js",
+    "static/js/2.d275db3c.chunk.js.map": "/browsers-support-badges/static/js/2.d275db3c.chunk.js.map",
     "index.html": "/browsers-support-badges/index.html",
-    "precache-manifest.c3c6fca841d32139c5e486e7db229f74.js": "/browsers-support-badges/precache-manifest.c3c6fca841d32139c5e486e7db229f74.js",
+    "precache-manifest.244b759362bc689c39bd2eb07909e511.js": "/browsers-support-badges/precache-manifest.244b759362bc689c39bd2eb07909e511.js",
     "service-worker.js": "/browsers-support-badges/service-worker.js",
     "static/css/2.02d6bbd9.chunk.css.map": "/browsers-support-badges/static/css/2.02d6bbd9.chunk.css.map",
     "static/css/main.76fe0199.chunk.css.map": "/browsers-support-badges/static/css/main.76fe0199.chunk.css.map",
-    "static/js/2.9093dc94.chunk.js.LICENSE": "/browsers-support-badges/static/js/2.9093dc94.chunk.js.LICENSE",
+    "static/js/2.d275db3c.chunk.js.LICENSE.txt": "/browsers-support-badges/static/js/2.d275db3c.chunk.js.LICENSE.txt",
     "static/media/book.svg": "/browsers-support-badges/static/media/book.54693c71.svg",
     "static/media/check.svg": "/browsers-support-badges/static/media/check.1899110c.svg",
     "static/media/chevron-down.svg": "/browsers-support-badges/static/media/chevron-down.a78a81f8.svg",
@@ -23,10 +23,10 @@
     "static/media/x.svg": "/browsers-support-badges/static/media/x.a0f8f598.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.e5e4774d.js",
+    "static/js/runtime-main.1a9ef2cd.js",
     "static/css/2.02d6bbd9.chunk.css",
-    "static/js/2.9093dc94.chunk.js",
+    "static/js/2.d275db3c.chunk.js",
     "static/css/main.76fe0199.chunk.css",
-    "static/js/main.eaa6945f.chunk.js"
+    "static/js/main.4eb20cee.chunk.js"
   ]
 }
