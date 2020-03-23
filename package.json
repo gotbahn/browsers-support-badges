@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "clipboard": "2.0.4",
-        "marked": "0.8.0",
+        "marked": "0.8.2",
         "no-sheet-reset": "2.0.0",
         "@primer/octicons": "9.3.1",
         "react": "16.10.1",
