@@ -23,7 +23,7 @@
         "@primer/octicons": "9.4.0",
         "react": "16.10.1",
         "react-dom": "16.11.0",
-        "react-scripts": "3.4.0"
+        "react-scripts": "4.0.3"
     },
     "browserslist": {
         "development": [
